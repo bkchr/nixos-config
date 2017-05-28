@@ -4,8 +4,9 @@
 
 { config, pkgs, ... }:
 
-let 
+let
   user = "bastian";
+  yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; });
 in
 {
   imports =
@@ -65,6 +66,7 @@ in
      kdiff3
      direnv
   ];
+
 
   # List services that you want to enable:
 
