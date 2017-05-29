@@ -37,6 +37,9 @@ in
   # Build every package in a sandbox
   nix.useSandbox = true;
 
+  # Use all available cores for building
+  nix.buildCores = 0;
+
   # List packages installed in system profile. To search by name, run
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
