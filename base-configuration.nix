@@ -6,7 +6,9 @@
 
 let
   user = "bastian";
-  yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; });
+  yakuake_autostart = (local_pkgs.makeAutostartItem { name = "yakuake"; package = local_pkgs.yakuake.unwrapped; srcPrefix = "org.kde.";  });
+  local_pkgs_path = "/home/bastian/projects/nixos/nixpkgs/";
+  local_pkgs = if builtins.pathExists local_pkgs_path then (import local_pkgs_path { config = {}; }) else pkgs;
 in
 {
   imports =
@@ -47,7 +49,6 @@ in
      emacs
      git
      vim
-     yakuake
      kdeconnect
      chromium
      keepassx2
@@ -65,6 +66,8 @@ in
      iw
      kdiff3
      direnv
+     yakuake
+     #yakuake_autostart
   ];
 
 
