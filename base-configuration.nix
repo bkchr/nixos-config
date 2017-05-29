@@ -5,7 +5,14 @@
 { config, pkgs, ... }:
 
 let
-  user = "bastian";
+  user = {
+    isNormalUser = true;
+    home = "/home/bastian";
+    description = "Bastian Köcher";
+    # grant access to sudo and to the network
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ];
+    uid = 1000;
+  };
   yakuake_autostart = (local_pkgs.makeAutostartItem { name = "yakuake"; package = local_pkgs.yakuake.unwrapped; srcPrefix = "org.kde.";  });
   local_pkgs_path = "/home/bastian/projects/nixos/nixpkgs/";
   local_pkgs = if builtins.pathExists local_pkgs_path then (import local_pkgs_path { config = {}; }) else pkgs;
@@ -93,14 +100,7 @@ in
   networking.networkmanager.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.bastian = {
-    isNormalUser = true;
-    home = "/home/bastian";
-    description = "Bastian Köcher";
-    # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ];
-    uid = 1000;
-  };
+  users.extraUsers.bastian = user;
 
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
@@ -209,6 +209,7 @@ in
   services.syncthing.enable = true;
   services.syncthing.openDefaultPorts = true;
   services.syncthing.user = "bastian";
+  services.syncthing.dataDir = "${user.home}/.syncthing";
 
   programs.adb.enable = true;
 
