@@ -98,7 +98,7 @@ in
     home = "/home/bastian";
     description = "Bastian Köcher";
     # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ]; 
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ];
     uid = 1000;
   };
 
@@ -126,7 +126,7 @@ in
     source $ZSH/oh-my-zsh.sh
 
     SPACESHIP_DOCKER_SHOW=false
-   
+
     eval "$(direnv hook zsh)"
   '';
 
@@ -181,21 +181,23 @@ in
             '';
         });
 
-        oh-my-zsh = 
-            let 
-              spaceshiptheme = pkgs.fetchurl { 
-                url = "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/a9819c528904000f5d246d3ed3c7514a30cf495a/spaceship.zsh"; 
-                sha256 = "d469b6843a09152c56ecb01fd589adf194ba1edda58f7f0887b387ea06561408"; 
+        oh-my-zsh =
+            let
+              spaceshiptheme = pkgs.fetchurl {
+                url = "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/a9819c528904000f5d246d3ed3c7514a30cf495a/spaceship.zsh";
+                sha256 = "d469b6843a09152c56ecb01fd589adf194ba1edda58f7f0887b387ea06561408";
               };
             in
               pkgs.lib.overrideDerivation pkgs.oh-my-zsh (attrs: {
                 # Install spaceship theme
-                installPhase = [ 
+                installPhase = [
                   attrs.installPhase
                   ''outdir=$out/share/oh-my-zsh
                     chmod -R +w $outdir
                     mkdir -p $outdir/custom/themes
                     cp -v ${spaceshiptheme} $outdir/custom/themes/spaceship.zsh-theme
+                    mkdir -p $outdir/custom/plugins/nix
+                    cp -R ${pkgs.nix-zsh-completions}/share/zsh/site-functions/* $outdir/custom/plugins/nix/
                   ''
             ];
         });
@@ -218,5 +220,4 @@ in
       source-code-pro
     ];
   };
-
 }
