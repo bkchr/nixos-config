@@ -143,8 +143,8 @@ in
      description = "Emacs Daemon";
      serviceConfig = {
        Type = "forking";
-       ExecStart = "/bin/sh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
-       ExecStop = "/bin/sh -c \"${pkgs.emacs}/bin/emacsclient --eval (kill-emacs)\"";
+       ExecStart = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
+       ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval (kill-emacs)\"";
        Restart = "always";
      };
 
@@ -152,14 +152,17 @@ in
        GTK_DATA_PREFIX = config.system.path;
        SSH_AUTH_SOCK = "%t/ssh-agent";
        GTK_PATH = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
-       NIX_PROFILES = "${pkgs.lib.concatStringsSep " " config.environment.profiles}"; 
+       NIX_PROFILES = "${pkgs.lib.concatStringsSep " " config.environment.profiles}";
        TERMINFO_DIRS = "/run/current-system/sw/share/terminfo";
        ASPELL_CONF = "dict-dir /run/current-system/sw/lib/aspell";
+       HOME = "/home/bastian/";
      };
-     
+
+     path = with pkgs; [direnv];
+
      wantedBy = [ "default.target" ];
    };
- 
+
    systemd.user.services.emacs.enable = true;
 
    nixpkgs.config = {
