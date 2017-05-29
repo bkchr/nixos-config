@@ -39,5 +39,5 @@
      wantedBy = [ "multi-user.target" ];
   }; 
 
-  powerManagement.powertop.enable = true;
+  #powerManagement.powertop.enable = true;
 }
