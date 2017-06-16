@@ -34,7 +34,6 @@ in
   #Select internationalisation properties.
   i18n = {
      consoleFont = "Lat2-Terminus16";
-     consoleKeyMap = "de";
      defaultLocale = "en_US.UTF-8";
   };
 
@@ -75,6 +74,7 @@ in
      direnv
      yakuake
      #yakuake_autostart
+     htop
   ];
 
 
@@ -86,7 +86,6 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "de";
     xkbOptions = "eurosign:e";
 
     # Enable the KDE Desktop Environment.

@@ -19,4 +19,8 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
+
+  i18n.consoleKeyMap = "de";
+  services.xserver.layout = "de";
+
 }
