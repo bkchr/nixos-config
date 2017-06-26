@@ -27,8 +27,10 @@
 
     displayManager.sessionCommands =
       ''
-        xrandr --newmode "1920x1200_60.00"  193.25  1920 2056 2256 2592  1200 1203 1209 1245 -hsync +vsync
-        xrandr --addmode eDP-1 "1920x1200_60.00"
+        modeline=$(cvt -v 1920 1080 | grep Modeline | sed -e "s/Modeline //")
+        xrandr --newmode $modeline
+        modename=$(echo $modeline | awk '{ print $1; }')
+        xrandr --addmode eDP-1 $modename
       '';
   };
 
