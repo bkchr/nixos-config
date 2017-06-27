@@ -18,6 +18,12 @@ let
   local_pkgs = if builtins.pathExists local_pkgs_path then (import local_pkgs_path { config = {}; }) else pkgs;
 in
 {
+  nix.nixPath = [
+      "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
+      "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
+
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -70,7 +76,7 @@ in
      oh-my-zsh
      wget
      iw
-     kdiff3
+     #kdiff3
      direnv
      yakuake
      #yakuake_autostart
