@@ -13,11 +13,15 @@ let
     extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ];
     uid = 1000;
   };
-  yakuake_autostart = (local_pkgs.makeAutostartItem { name = "yakuake"; package = local_pkgs.yakuake.unwrapped; srcPrefix = "org.kde.";  });
-  local_pkgs_path = "/home/bastian/projects/nixos/nixpkgs/";
-  local_pkgs = if builtins.pathExists local_pkgs_path then (import local_pkgs_path { config = {}; }) else pkgs;
+  yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
 in
 {
+  nix.nixPath = [
+      "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
+      "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
+      "nixos-config=/etc/nixos/configuration.nix"
+    ];
+
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
@@ -27,6 +31,8 @@ in
      enableAllFirmware = true;
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,7 +40,6 @@ in
   #Select internationalisation properties.
   i18n = {
      consoleFont = "Lat2-Terminus16";
-     consoleKeyMap = "de";
      defaultLocale = "en_US.UTF-8";
   };
 
@@ -74,7 +79,10 @@ in
      kdiff3
      direnv
      yakuake
-     #yakuake_autostart
+     yakuake_autostart
+     htop
+     qt5.qtwayland
+     psmisc
   ];
 
 
@@ -89,7 +97,6 @@ in
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "de";
     xkbOptions = "eurosign:e";
 
     # Enable the KDE Desktop Environment.

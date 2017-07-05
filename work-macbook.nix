@@ -40,4 +40,7 @@
   }; 
 
   #powerManagement.powertop.enable = true;
+
+  i18n.consoleKeyMap = "de";
+  services.xserver.layout = "de";
 }

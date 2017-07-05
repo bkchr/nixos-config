@@ -24,4 +24,6 @@
     steam
   ];
 
+  i18n.consoleKeyMap = "de";
+  services.xserver.layout = "de";
 }

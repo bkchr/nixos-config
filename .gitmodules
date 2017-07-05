@@ -1,3 +1,6 @@
 [submodule "nixpkgs-mozilla"]
 	path = nixpkgs-mozilla
 	url = git@github.com:bkchr/nixpkgs-mozilla.git
+[submodule "nixpkgs"]
+	path = nixpkgs
+	url = git@github.com:bkchr/nixpkgs.git
