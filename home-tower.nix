@@ -22,6 +22,7 @@
 
   environment.systemPackages = with pkgs; [
     steam
+    teamspeak_client
   ];
 
   i18n.consoleKeyMap = "de";

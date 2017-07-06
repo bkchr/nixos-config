@@ -83,6 +83,7 @@ in
      htop
      qt5.qtwayland
      psmisc
+     okular
   ];
 
 
