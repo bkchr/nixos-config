@@ -86,6 +86,7 @@ in
      okular
      pass
      ntfs3g
+     spectacle
   ];
 
 
