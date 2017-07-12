@@ -18,6 +18,8 @@
     }
   ];
 
+  boot.extraModprobeConfig = ''options thinkpad_acpi fan_control=1'';
+
   networking.hostName = "BastiTP-Nixos"; # Define your hostname.
 
   # Enable the X11 windowing system.

@@ -84,6 +84,8 @@ in
      qt5.qtwayland
      psmisc
      okular
+     pass
+     ntfs3g
   ];
 
 
