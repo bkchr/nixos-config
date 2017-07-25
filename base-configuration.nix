@@ -87,6 +87,7 @@ in
      pass
      ntfs3g
      spectacle
+     firefox
   ];
 
 
