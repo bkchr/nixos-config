@@ -61,7 +61,6 @@ in
      emacs
      git
      vim
-     kdeconnect
      chromium
      keepassx2
      konversation
@@ -227,6 +226,7 @@ in
   services.syncthing.dataDir = "${user.home}/.syncthing";
 
   programs.adb.enable = true;
+  programs.kdeconnect.enable = true;
 
   fonts = {
     fontconfig.enable = true;
