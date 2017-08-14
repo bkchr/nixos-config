@@ -87,6 +87,7 @@ in
      ntfs3g
      spectacle
      firefox
+     ripgrep
   ];
 
 
