@@ -159,7 +159,7 @@ in
      serviceConfig = {
        Type = "forking";
        ExecStart = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
-       ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval (kill-emacs)\"";
+       ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval \\\"(kill-emacs)\\\"\"";
        Restart = "always";
      };
 
