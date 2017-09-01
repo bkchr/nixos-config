@@ -20,7 +20,10 @@ in
       "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
       "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
       "nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs-overlays=/home/bastian/projects/nixos/nixos-config/overlays"
     ];
+ 
+  nixpkgs.overlays = [ (import /home/bastian/projects/nixos/nixos-config/overlays) ];
 
   imports =
     [ # Include the results of the hardware scan.
@@ -61,7 +64,6 @@ in
      emacs
      git
      vim
-     chromium
      keepassx2
      konversation
      aspell
@@ -86,8 +88,10 @@ in
      pass
      ntfs3g
      spectacle
-     firefox
      ripgrep
+
+     # Mozilla Overlay
+     latest.firefox-nightly-bin
   ];
 
 
