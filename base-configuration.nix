@@ -241,4 +241,9 @@ in
       source-code-pro
     ];
   };
+
+  environment.sessionVariables = {
+    # set vim as global editor
+    EDITOR = "${pkgs.vim}/bin/vim";
+  };
 }
