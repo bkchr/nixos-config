@@ -158,6 +158,9 @@ in
   # Open UDP port for tftp server
   networking.firewall.allowedUDPPorts = [ 69 ];
 
+  # Set google as default nameserver
+  networking.nameservers = [ "8.8.8.8" ];
+
   systemd.user.services.emacs = {
      description = "Emacs Daemon";
      serviceConfig = {
