@@ -91,7 +91,7 @@ in
      ripgrep
 
      # Mozilla Overlay
-     latest.firefox-nightly-bin
+     latest.firefox-beta-bin
   ];
 
 
