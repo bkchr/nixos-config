@@ -89,6 +89,9 @@ in
      ntfs3g
      spectacle
      ripgrep
+     kdeconnect
+     # required for kdeconnect
+     sshfs-fuse
 
      # Mozilla Overlay
      latest.firefox-beta-bin
@@ -158,72 +161,75 @@ in
   # Open UDP port for tftp server
   networking.firewall.allowedUDPPorts = [ 69 ];
 
+  # Open TCP and UDP port ranges for kdeconnect
+  networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+  networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+
   # Set google as default nameserver
   networking.nameservers = [ "8.8.8.8" ];
 
   systemd.user.services.emacs = {
-     description = "Emacs Daemon";
-     serviceConfig = {
-       Type = "forking";
-       ExecStart = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
-       ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval \\\"(kill-emacs)\\\"\"";
-       Restart = "always";
-     };
+    description = "Emacs Daemon";
+    serviceConfig = {
+      Type = "forking";
+      ExecStart = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
+      ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval \\\"(kill-emacs)\\\"\"";
+      Restart = "always";
+    };
 
-     environment = {
-       GTK_DATA_PREFIX = config.system.path;
-       SSH_AUTH_SOCK = "%t/ssh-agent";
-       GTK_PATH = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
-       NIX_PROFILES = "${pkgs.lib.concatStringsSep " " config.environment.profiles}";
-       TERMINFO_DIRS = "/run/current-system/sw/share/terminfo";
-       ASPELL_CONF = "dict-dir /run/current-system/sw/lib/aspell";
-       HOME = "/home/bastian/";
-     };
+    environment = {
+      GTK_DATA_PREFIX = config.system.path;
+      SSH_AUTH_SOCK = "%t/ssh-agent";
+      GTK_PATH = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
+      NIX_PROFILES = "${pkgs.lib.concatStringsSep " " config.environment.profiles}";
+      TERMINFO_DIRS = "/run/current-system/sw/share/terminfo";
+      ASPELL_CONF = "dict-dir /run/current-system/sw/lib/aspell";
+      HOME = "/home/bastian/";
+    };
 
-     path = with pkgs; [direnv];
+    path = with pkgs; [direnv];
 
-     wantedBy = [ "default.target" ];
-   };
+    wantedBy = [ "default.target" ];
+  };
 
-   systemd.user.services.emacs.enable = true;
+  systemd.user.services.emacs.enable = true;
 
-   nixpkgs.config = {
+  nixpkgs.config = {
     # I want unfree packages
     allowUnfree = true;
 
     packageOverrides = pkgs: {
-        # Define my own Emacs
-        emacs = pkgs.lib.overrideDerivation (pkgs.emacs.override {
-            withGTK3 = true;
-            withGTK2 = false;
-          }) (attrs: {
-            # "Improve" the emacs.desktop to point to the emacsclient
-            postInstall = (attrs.postInstall or "") + ''
-               sed -i 's/emacs \%F/emacsclient -c -a "" \%F/g' $out/share/applications/emacs.desktop
-            '';
-        });
+      # Define my own Emacs
+      emacs = pkgs.lib.overrideDerivation (pkgs.emacs.override {
+        withGTK3 = true;
+        withGTK2 = false;
+      }) (attrs: {
+        # "Improve" the emacs.desktop to point to the emacsclient
+        postInstall = (attrs.postInstall or "") + ''
+          sed -i 's/emacs \%F/emacsclient -c -a "" \%F/g' $out/share/applications/emacs.desktop
+        '';
+      });
 
-        oh-my-zsh =
-            let
-              spaceshiptheme = pkgs.fetchurl {
-                url = "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/a9819c528904000f5d246d3ed3c7514a30cf495a/spaceship.zsh";
-                sha256 = "d469b6843a09152c56ecb01fd589adf194ba1edda58f7f0887b387ea06561408";
-              };
-            in
-              pkgs.lib.overrideDerivation pkgs.oh-my-zsh (attrs: {
-                # Install spaceship theme
-                installPhase = [
-                  attrs.installPhase
-                  ''outdir=$out/share/oh-my-zsh
-                    chmod -R +w $outdir
-                    mkdir -p $outdir/custom/themes
-                    cp -v ${spaceshiptheme} $outdir/custom/themes/spaceship.zsh-theme
-                    mkdir -p $outdir/custom/plugins/nix
-                    cp -R ${pkgs.nix-zsh-completions}/share/zsh/site-functions/* $outdir/custom/plugins/nix/
-                  ''
+      oh-my-zsh =
+        let
+          spaceshiptheme = pkgs.fetchurl {
+            url = "https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/a9819c528904000f5d246d3ed3c7514a30cf495a/spaceship.zsh";
+            sha256 = "d469b6843a09152c56ecb01fd589adf194ba1edda58f7f0887b387ea06561408";
+          };
+        in
+          pkgs.lib.overrideDerivation pkgs.oh-my-zsh (attrs: {
+            # Install spaceship theme
+            installPhase = [
+              attrs.installPhase
+                ''outdir=$out/share/oh-my-zsh
+                  chmod -R +w $outdir
+                  mkdir -p $outdir/custom/themes
+                  cp -v ${spaceshiptheme} $outdir/custom/themes/spaceship.zsh-theme
+                  mkdir -p $outdir/custom/plugins/nix
+                  cp -R ${pkgs.nix-zsh-completions}/share/zsh/site-functions/* $outdir/custom/plugins/nix/
+                ''
             ];
-        });
-
+          });
     };
 
   };
@@ -234,7 +240,6 @@ in
   services.syncthing.dataDir = "${user.home}/.syncthing";
 
   programs.adb.enable = true;
-  programs.kdeconnect.enable = true;
 
   fonts = {
     fontconfig.enable = true;
