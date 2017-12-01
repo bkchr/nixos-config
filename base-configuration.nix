@@ -95,6 +95,8 @@ in
 
      # Mozilla Overlay
      latest.firefox-beta-bin
+
+     signal-desktop
   ];
 
 
