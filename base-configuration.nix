@@ -97,6 +97,9 @@ in
      latest.firefox-beta-bin
 
      signal-desktop
+
+     gwenview
+     vlc
   ];
 
 
