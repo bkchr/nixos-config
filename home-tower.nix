@@ -23,6 +23,8 @@
   environment.systemPackages = with pkgs; [
     steam
     teamspeak_client
+    playonlinux
+    wineStaging
   ];
 
   i18n.consoleKeyMap = "de";
