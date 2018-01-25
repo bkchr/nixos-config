@@ -100,6 +100,8 @@ in
 
      gwenview
      vlc
+
+     ntfs3g
   ];
 
 
