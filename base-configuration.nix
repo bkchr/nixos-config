@@ -10,7 +10,7 @@ let
     home = "/home/bastian";
     description = "Bastian Köcher";
     # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
     uid = 1000;
   };
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
@@ -104,6 +104,7 @@ in
      ntfs3g
      kmail
      android-studio
+     skanlite
   ];
 
 
@@ -114,6 +115,10 @@ in
     enable = true;
     drivers = [ pkgs.hplipWithPlugin ];
   };
+
+  # Scanner support
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
 
   # Enable the X11 windowing system.
   services.xserver = {
