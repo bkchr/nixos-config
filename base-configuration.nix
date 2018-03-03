@@ -102,6 +102,8 @@ in
      vlc
 
      ntfs3g
+     kmail
+     android-studio
   ];
 
 
