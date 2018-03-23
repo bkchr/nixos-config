@@ -92,9 +92,7 @@ in
      kdeconnect
      # required for kdeconnect
      sshfs-fuse
-
-     # Mozilla Overlay
-     latest.firefox-beta-bin
+     firefox
 
      signal-desktop
 
