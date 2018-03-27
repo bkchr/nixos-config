@@ -111,7 +111,15 @@ in
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
+    browsing = true;
     drivers = [ pkgs.hplipWithPlugin ];
+  };
+
+  # Enable Avahi to detect printers in local network
+  services.avahi = {
+    enable = true;
+    publish.enable = true;
+    publish.userServices = true;
   };
 
   # Scanner support
