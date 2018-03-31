@@ -161,7 +161,7 @@ in
 
     # Customize your oh-my-zsh options here
     ZSH_THEME="spaceship"
-    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions)
+    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode)
 
     source "$(autojump-share)/autojump.zsh"
 
