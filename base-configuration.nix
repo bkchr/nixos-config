@@ -154,4 +154,6 @@ in
     # set vim as global editor
     EDITOR = "${pkgs.vim}/bin/vim";
   };
+
+  services.sshd.enable = true;
 }
