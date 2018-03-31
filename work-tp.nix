@@ -5,10 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the base configuration that is equal accross all my machines.
-      ./base-configuration.nix
-    ];
+  imports = [
+    # Include the base configuration that is equal accross all my machines.
+    ./system-with-gui-configuration.nix
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   boot.initrd.luks.devices = [
     {
