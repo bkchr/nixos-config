@@ -121,6 +121,8 @@ in
   services.syncthing.user = "bastian";
   services.syncthing.dataDir = "${user.home}/.syncthing";
 
+  programs.adb.enable = true;
+
   fonts = {
     fontconfig.enable = true;
     enableFontDir = true;
