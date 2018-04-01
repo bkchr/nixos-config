@@ -16,11 +16,11 @@ let
 in
 {
   nix.nixPath = [
-      "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
-      "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
-      "nixos-config=/etc/nixos/configuration.nix"
-      "nixpkgs-overlays=/home/bastian/projects/nixos/nixos-config/overlays"
-    ];
+    "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
+    "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
+    "nixos-config=/etc/nixos/configuration.nix"
+    "nixpkgs-overlays=/home/bastian/projects/nixos/nixos-config/overlays"
+  ];
  
   nixpkgs.overlays = [ (import /home/bastian/projects/nixos/nixos-config/overlays) ];
 
@@ -68,7 +68,6 @@ in
      psmisc
      pass
      ntfs3g
-     ripgrep
   ];
 
 
@@ -80,8 +79,6 @@ in
     publish.enable = true;
     publish.userServices = true;
   };
-
-  networking.networkmanager.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.bastian = user;

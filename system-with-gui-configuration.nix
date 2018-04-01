@@ -46,6 +46,7 @@ in
      kmail
      android-studio
      skanlite
+     ripgrep
   ];
 
 
@@ -68,6 +69,8 @@ in
   # Pulseaudio
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  networking.networkmanager.enable = true;
  
   # Open UDP port for tftp server
   networking.firewall.allowedUDPPorts = [ 69 ];
