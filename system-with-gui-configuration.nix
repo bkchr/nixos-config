@@ -11,6 +11,7 @@ in
   imports = [
     # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
+    ./base-configuration.nix
   ];
 
   hardware = {
@@ -59,11 +60,21 @@ in
     drivers = [ pkgs.hplipWithPlugin ];
   };
 
-  # Enable Avahi to detect printers in local network
-  services.avahi = {
+  # Scanner support
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.hplipWithPlugin ];
+
+  # Enable the X11 windowing system.
+  services.xserver = {
     enable = true;
-    publish.enable = true;
-    publish.userServices = true;
+    xkbOptions = "eurosign:e";
+
+    # Enable the KDE Desktop Environment.
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
+
+    libinput.enable = true;
+    libinput.disableWhileTyping = true;
   };
 
   # Pulseaudio
@@ -122,7 +133,7 @@ in
   services.syncthing.enable = true;
   services.syncthing.openDefaultPorts = true;
   services.syncthing.user = "bastian";
-  services.syncthing.dataDir = "${user.home}/.syncthing";
+  services.syncthing.dataDir = "/home/bastian/.syncthing";
 
   programs.adb.enable = true;
 
