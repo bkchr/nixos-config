@@ -86,7 +86,7 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.03";
+  system.nixos.stateVersion = "18.03";
 
   # ZSH
   programs.zsh.enable = true;
