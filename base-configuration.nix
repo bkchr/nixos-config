@@ -96,9 +96,7 @@ in
 
     # Customize your oh-my-zsh options here
     ZSH_THEME="spaceship"
-    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode)
-
-    source "$(autojump-share)/autojump.zsh"
+    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode autojump)
 
     source $ZSH/oh-my-zsh.sh
 

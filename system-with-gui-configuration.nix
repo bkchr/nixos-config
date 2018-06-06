@@ -48,6 +48,7 @@ in
      android-studio
      skanlite
      ripgrep
+     nheko
   ];
 
 
