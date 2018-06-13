@@ -25,6 +25,8 @@
     teamspeak_client
     playonlinux
     wineStaging
+    vagrant
+    virtualbox
   ];
 
   i18n.consoleKeyMap = "de";
