@@ -49,6 +49,7 @@ in
      skanlite
      ripgrep
      nheko
+     plasma-browser-integration
   ];
 
 
@@ -129,6 +130,7 @@ in
       });
     };
 
+    firefox.enablePlasmaBrowserIntegration = true;
   };
 
   services.syncthing.enable = true;
