@@ -106,7 +106,7 @@ in
   '';
 
   programs.zsh.promptInit = ""; # Clear this to avoid a conflict with oh-my-zsh
-  programs.zsh.enableAutosuggestions=true;
+  programs.zsh.autosuggestions.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;
