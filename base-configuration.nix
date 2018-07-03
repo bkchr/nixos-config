@@ -86,7 +86,7 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.03";
+  system.nixos.stateVersion = "18.03";
 
   # ZSH
   programs.zsh.enable = true;
@@ -96,9 +96,7 @@ in
 
     # Customize your oh-my-zsh options here
     ZSH_THEME="spaceship"
-    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode)
-
-    source "$(autojump-share)/autojump.zsh"
+    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode autojump)
 
     source $ZSH/oh-my-zsh.sh
 
@@ -108,7 +106,7 @@ in
   '';
 
   programs.zsh.promptInit = ""; # Clear this to avoid a conflict with oh-my-zsh
-  programs.zsh.enableAutosuggestions=true;
+  programs.zsh.autosuggestions.enable = true;
 
   # Docker
   virtualisation.docker.enable = true;
@@ -151,4 +149,5 @@ in
   };
 
   services.sshd.enable = true;
+  programs.ssh.startAgent = true;
 }

@@ -17,8 +17,6 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
 
-  boot.loader.grub.useOSProber = true;
-
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.driSupport32Bit = true;
 
@@ -27,6 +25,8 @@
     teamspeak_client
     playonlinux
     wineStaging
+    vagrant
+    virtualbox
   ];
 
   i18n.consoleKeyMap = "de";
