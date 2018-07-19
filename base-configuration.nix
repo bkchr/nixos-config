@@ -10,7 +10,7 @@ let
     home = "/home/bastian";
     description = "Bastian Köcher";
     # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" ];
     uid = 1000;
   };
 in
@@ -68,6 +68,7 @@ in
      psmisc
      pass
      ntfs3g
+     ripgrep
   ];
 
 

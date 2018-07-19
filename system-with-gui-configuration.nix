@@ -47,7 +47,6 @@ in
      kmail
      android-studio
      skanlite
-     ripgrep
      nheko
      plasma-browser-integration
   ];

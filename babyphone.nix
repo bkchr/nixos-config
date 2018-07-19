@@ -58,4 +58,10 @@
      '';
      })
   ];
+
+  # Enable pulseaudio
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
+  boot.kernelPackages = pkgs.linuxPackages_testing;
 }
