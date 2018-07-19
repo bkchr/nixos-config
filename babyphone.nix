@@ -19,6 +19,8 @@
   services.nixosManual.enable = false;
 
   boot.kernelParams = [ "cma=32M" ];
+  # Load the camera kernel module by default
+  boot.kernelModules = [ "bcm2835-v4l2" ];
 
   fileSystems = {
     "/" = {
