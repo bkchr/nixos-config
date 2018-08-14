@@ -60,7 +60,6 @@ in
      hexedit
      powertop
      autojump
-     oh-my-zsh
      wget
      iw
      direnv
@@ -87,27 +86,21 @@ in
   users.defaultUserShell = "/run/current-system/sw/bin/zsh";
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.nixos.stateVersion = "18.03";
+  system.stateVersion = "18.03";
 
   # ZSH
-  programs.zsh.enable = true;
-
-  programs.zsh.interactiveShellInit = ''
-    export ZSH=${pkgs.oh-my-zsh}/share/oh-my-zsh/
-
-    # Customize your oh-my-zsh options here
-    ZSH_THEME="spaceship"
-    plugins=(git rust cargo docker emacs github gitignore systemd zsh-autosuggestions vi-mode autojump)
-
-    source $ZSH/oh-my-zsh.sh
-
-    SPACESHIP_DOCKER_SHOW=false
-
-    eval "$(direnv hook zsh)"
-  '';
-
-  programs.zsh.promptInit = ""; # Clear this to avoid a conflict with oh-my-zsh
-  programs.zsh.autosuggestions.enable = true;
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    ohMyZsh.enable = true;
+    ohMyZsh.plugins = ["git" "rust" "cargo" "docker" "emacs" "github" "gitignore" "systemd" "vi-mode" "autojump" ];
+    ohMyZsh.theme = "spaceship";
+    syntaxHighlighting.enable = true;
+    interactiveShellInit = ''
+      SPACESHIP_DOCKER_SHOW=false
+      eval "$(direnv hook zsh)"
+    '';
+  };
 
   # Docker
   virtualisation.docker.enable = true;
