@@ -23,6 +23,7 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  services.dbus.socketActivated = true;
 
   # List packages installed in system profile. To search by name, run
   # $ nix-env -qaP | grep wget
@@ -35,6 +36,7 @@ in
      yakuake
      yakuake_autostart
      qt5.qtwayland
+     kwayland-integration
      okular
      spectacle
      kdeconnect

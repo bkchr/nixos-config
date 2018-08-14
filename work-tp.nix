@@ -42,4 +42,8 @@
   hardware.bluetooth.enable = true;
 
   powerManagement.powertop.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    skype
+  ];
 }
