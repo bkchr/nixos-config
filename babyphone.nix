@@ -66,4 +66,8 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   boot.kernelPackages = pkgs.linuxPackages_testing;
+
+  # Enable the networkmanager
+  networking.networkmanager.enable = true;
+  #environment.noXlibs = true;
 }
