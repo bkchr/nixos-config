@@ -70,4 +70,7 @@
   # Enable the networkmanager
   networking.networkmanager.enable = true;
   #environment.noXlibs = true;
+
+  # Open the babyphone server port for local reachability
+  networking.firewall.allowedUDPPorts = [ 22222 ];
 }
