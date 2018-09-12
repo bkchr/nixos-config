@@ -59,7 +59,7 @@ in
      unzip
      hexedit
      powertop
-     autojump
+     fasd
      wget
      iw
      direnv
@@ -93,7 +93,7 @@ in
     enable = true;
     autosuggestions.enable = true;
     ohMyZsh.enable = true;
-    ohMyZsh.plugins = ["git" "rust" "cargo" "docker" "emacs" "github" "gitignore" "systemd" "vi-mode" "autojump" ];
+    ohMyZsh.plugins = ["git" "rust" "cargo" "docker" "emacs" "github" "gitignore" "systemd" "vi-mode" "fasd" ];
     ohMyZsh.theme = "spaceship";
     syntaxHighlighting.enable = true;
     interactiveShellInit = ''
