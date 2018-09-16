@@ -41,4 +41,6 @@
     leftspeed = "0 1000 2000 3000";
     rightspeed = "0 1000 2000 3000";
   };
+
+  services.sshd.enable = false;
 }

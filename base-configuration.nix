@@ -142,6 +142,5 @@ in
     EDITOR = "${pkgs.vim}/bin/vim";
   };
 
-  services.sshd.enable = true;
   programs.ssh.startAgent = true;
 }

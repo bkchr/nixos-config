@@ -73,4 +73,6 @@
 
   # Open the babyphone server port for local reachability
   networking.firewall.allowedUDPPorts = [ 22222 ];
+
+  services.sshd.enable = true;
 }

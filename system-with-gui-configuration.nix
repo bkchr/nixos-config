@@ -85,9 +85,6 @@ in
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   networking.networkmanager.enable = true;
- 
-  # Open UDP port for tftp server
-  networking.firewall.allowedUDPPorts = [ 69 ];
 
   # Open TCP and UDP port ranges for kdeconnect
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
