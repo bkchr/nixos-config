@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  server = pkgs.callPackage /home/bastian/projects/private/babyphone_app/babyphone-server.nix {};
+in
 {
   imports = [
     # Include the base configuration that is equal accross all my machines.
@@ -75,4 +78,33 @@
   networking.firewall.allowedUDPPorts = [ 22222 ];
 
   services.sshd.enable = true;
+
+  users.extraUsers.babyphone = {
+    name = "babyphone";
+    createHome = true;
+    home = "/var/lib/babyphone";
+    extraGroups = [ "networkmanager" "video" "audio" ];
+  };
+
+  systemd.services.babyphone-server =
+    let
+      client_ca_path = "/home/bastian/projects/private/babyphone_app/certs";
+      server_ca_path = "/home/bastian/projects/private/carrier/test_certs/trusted_bearer_cas";
+    in
+    {
+      description = "Babyphone Server";
+      preStart = ''
+        cp -fR ${client_ca_path} /var/lib/babyphone/client_ca_path
+        cp -fR ${server_ca_path} /var/lib/babyphone/server_ca_path
+      '';
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${server}/bin/babyphone-server --client_ca_path /var/lib/babyphone/client_ca_path --server_ca_path /var/lib/babyphone/server_ca_path";
+        Restart = "always";
+        User = "babyphone";
+      };
+
+      after = [ "network.target" ];
+      wantedBy = [ "default.target" ];
+    };
 }
