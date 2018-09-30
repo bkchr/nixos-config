@@ -93,10 +93,17 @@ in
     in
     {
       description = "Babyphone Server";
+
       preStart = ''
         cp -fR ${client_ca_path} /var/lib/babyphone/client_ca_path
         cp -fR ${server_ca_path} /var/lib/babyphone/server_ca_path
       '';
+
+      environment = {
+        RUST_LOG = "info";
+        RUST_BACKTRACE = "1";
+      };
+
       serviceConfig = {
         Type = "simple";
         ExecStart = "${server}/bin/babyphone-server --client_ca_path /var/lib/babyphone/client_ca_path --server_ca_path /var/lib/babyphone/server_ca_path";
