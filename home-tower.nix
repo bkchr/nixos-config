@@ -29,8 +29,5 @@
     virtualbox
   ];
 
-  i18n.consoleKeyMap = "de";
-  services.xserver.layout = "de";
-
   services.sshd.enable = true;
 }
