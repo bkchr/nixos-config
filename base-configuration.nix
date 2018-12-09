@@ -15,13 +15,26 @@ let
   };
 in
 {
-  nix.nixPath = [
-    "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
-    "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
-    "nixos-config=/etc/nixos/configuration.nix"
-    "nixpkgs-overlays=/home/bastian/projects/nixos/nixos-config/overlays"
-  ];
- 
+  nix = {
+    distributedBuilds = true;
+    buildMachines = [
+      {
+         hostName = "aarch64.nixos.community";
+         maxJobs = 96;
+         sshKey = "/root/nixos";
+         sshUser = "bkchr";
+         system = "aarch64-linux";
+         supportedFeatures = [ "big-parallel" ];
+      }
+    ];
+    nixPath = [
+      "nixpkgs=/home/bastian/projects/nixos/nixos-config/nixpkgs"
+      "nixos=/home/bastian/projects/nixos/nixos-config/nixpkgs/nixos"
+      "nixos-config=/etc/nixos/configuration.nix"
+      "nixpkgs-overlays=/home/bastian/projects/nixos/nixos-config/overlays"
+    ];
+  };
+
   nixpkgs.overlays = [ (import /home/bastian/projects/nixos/nixos-config/overlays) ];
 
   hardware = {

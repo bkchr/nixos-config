@@ -49,8 +49,8 @@ in
      kmail
      android-studio
      skanlite
-     nheko
      plasma-browser-integration
+     atom
   ];
 
 

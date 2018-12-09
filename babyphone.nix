@@ -34,20 +34,6 @@ in
 
   swapDevices = [ { device = "/swapfile"; size = 1024; } ];
 
-  nix = {
-    distributedBuilds = true;
-    buildMachines = [
-      {
-         hostName = "aarch64.nixos.community";
-         maxJobs = 96;
-         sshKey = "/root/nixos";
-         sshUser = "bkchr";
-         system = "aarch64-linux";
-         supportedFeatures = [ "big-parallel" ];
-      }
-    ];
-  };
-
   hardware.enableRedistributableFirmware = true;
   hardware.firmware = [
     (pkgs.stdenv.mkDerivation {
