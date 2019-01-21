@@ -129,6 +129,7 @@ in
     };
 
     firefox.enablePlasmaBrowserIntegration = true;
+    android_sdk.accept_license = true;
   };
 
   services.syncthing.enable = true;
