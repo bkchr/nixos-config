@@ -50,7 +50,7 @@ in
      android-studio
      skanlite
      plasma-browser-integration
-     atom
+     vscode
   ];
 
 
@@ -138,6 +138,7 @@ in
   services.syncthing.dataDir = "/home/bastian/.syncthing";
 
   programs.adb.enable = true;
+  programs.browserpass.enable = true;
 
   fonts = {
     fontconfig.enable = true;

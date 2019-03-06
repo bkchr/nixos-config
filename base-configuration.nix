@@ -13,6 +13,8 @@ let
     extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" ];
     uid = 1000;
   };
+  # Make pass use gpg2 and add `pass-otp`
+  pass = (pkgs.pass.override { gnupg = pkgs.gnupg20; }).withExtensions (ext: [ext.pass-otp]);
 in
 {
   nix = {
@@ -78,11 +80,20 @@ in
      direnv
      htop
      psmisc
-     pass
      ntfs3g
      ripgrep
+
+     pass
+     gnupg20
+     yubikey-personalization
   ];
 
+  services.udev.packages = with pkgs; [
+    yubikey-personalization
+  ];
+
+  # Enable api for programs to communicate with smartcards
+  services.pcscd.enable = true;
 
   # List services that you want to enable:
 
