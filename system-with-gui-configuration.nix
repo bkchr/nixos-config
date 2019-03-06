@@ -28,7 +28,6 @@ in
   # List packages installed in system profile. To search by name, run
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-     emacs
      keepassx2
      konversation
      ark
@@ -90,44 +89,7 @@ in
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
 
-  systemd.user.services.emacs = {
-    description = "Emacs Daemon";
-    serviceConfig = {
-      Type = "forking";
-      ExecStart = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacs --daemon\"";
-      ExecStop = "${pkgs.zsh}/bin/zsh -c \"${pkgs.emacs}/bin/emacsclient --eval \\\"(kill-emacs)\\\"\"";
-      Restart = "always";
-    };
-
-    environment = {
-      GTK_DATA_PREFIX = config.system.path;
-      SSH_AUTH_SOCK = "%t/ssh-agent";
-      GTK_PATH = "${config.system.path}/lib/gtk-3.0:${config.system.path}/lib/gtk-2.0";
-      NIX_PROFILES = "${pkgs.lib.concatStringsSep " " config.environment.profiles}";
-      TERMINFO_DIRS = "/run/current-system/sw/share/terminfo";
-      ASPELL_CONF = "dict-dir /run/current-system/sw/lib/aspell";
-      HOME = "/home/bastian/";
-    };
-
-    path = with pkgs; [direnv];
-
-    wantedBy = [ "default.target" ];
-  };
-
   nixpkgs.config = {
-    packageOverrides = pkgs: {
-      # Define my own Emacs
-      emacs = pkgs.lib.overrideDerivation (pkgs.emacs.override {
-        withGTK3 = true;
-        withGTK2 = false;
-      }) (attrs: {
-        # "Improve" the emacs.desktop to point to the emacsclient
-        postInstall = (attrs.postInstall or "") + ''
-          sed -i 's/emacs \%F/emacsclient -c -a "" \%F/g' $out/share/applications/emacs.desktop
-        '';
-      });
-    };
-
     firefox.enablePlasmaBrowserIntegration = true;
     android_sdk.accept_license = true;
   };
