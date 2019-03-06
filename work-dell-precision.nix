@@ -31,16 +31,5 @@
   services.xserver = {
     videoDrivers = [ "modesetting" ];
   };
-
-  services.i8kmon = {
-    enable = true;
-    state0 = "{0 0} \-1 60 \-1 60";
-    state1 = "{1 1} 50 90 60 90";
-    state2 = "{1 1} 80 100 80 100";
-    state3 = "{1 1} 110 128 110 128";
-    leftspeed = "0 1000 2000 3000";
-    rightspeed = "0 1000 2000 3000";
-  };
-
   services.sshd.enable = false;
 }
