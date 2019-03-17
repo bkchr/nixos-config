@@ -102,6 +102,7 @@ in
     enable = true;
     publish.enable = true;
     publish.userServices = true;
+    nssmdns = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
