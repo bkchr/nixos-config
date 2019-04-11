@@ -14,7 +14,7 @@ let
     uid = 1000;
   };
   # Make pass use gpg2 and add `pass-otp`
-  pass = (pkgs.pass.override { gnupg = pkgs.gnupg20; }).withExtensions (ext: [ext.pass-otp]);
+  pass = (pkgs.pass.override { gnupg = pkgs.gnupg22; }).withExtensions (ext: [ext.pass-otp]);
 in
 {
   nix = {
@@ -84,7 +84,7 @@ in
      ripgrep
 
      pass
-     gnupg20
+     gnupg22
      yubikey-personalization
   ];
 
@@ -167,5 +167,11 @@ in
     EDITOR = "${pkgs.vim}/bin/vim";
   };
 
-  programs.ssh.startAgent = true;
+  programs.gnupg = {
+    package = pkgs.gnupg22;
+    agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
 }
