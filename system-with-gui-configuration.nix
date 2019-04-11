@@ -6,6 +6,95 @@
 
 let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
+  myvscode = pkgs.vscode-with-extensions.override {
+    # When the extension is already available in the default extensions set.
+    vscodeExtensions = with pkgs.vscode-extensions; [
+      bbenoist.Nix
+      llvm-org.lldb-vscode
+      vscodevim.vim
+    ]
+    # Concise version from the vscode market place when not available in the default set.
+    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "one-monokai";
+        publisher = "azemoh";
+        version = "0.3.7";
+        sha256 = "0mv7ibhj66vsp24yy711hlan0rsvfiw5ba8g5x07c48r1nlxm6yj";
+      }
+      {
+        name = "better-toml";
+        publisher = "bungcip";
+        version = "0.3.2";
+        sha256 = "08lhzhrn6p0xwi0hcyp6lj9bvpfj87vr99klzsiy8ji7621dzql3";
+      }
+      {
+        name = "dart-code";
+        publisher = "Dart-Code";
+        version = "2.25.0";
+        sha256 = "1qh85174npip3hndrvm1ysraq6vz7yslr4286k8nnwymrnzml4pk";
+      }
+      {
+        name = "flutter";
+        publisher = "Dart-Code";
+        version = "2.25.0";
+        sha256 = "0bpaz57d2bdc8kv56m7p6p4ms6qziknirc4xa70i5dc1b0jdk74m";
+      }
+      {
+        name = "vscode-wasm";
+        publisher = "dtsvet";
+        version = "1.2.1";
+        sha256 = "1nvfdl1hqm655l60v9x857wyd7jc3jq7g5qigmydzndg6n6jgwjy";
+      }
+      {
+        name = "an-old-hope-theme-vscode";
+        publisher = "dustinsanders";
+        version = "3.2.1";
+        sha256 = "020h5iqh3d6qsqyv4ac7z35pyrwd1sjkh0b9w2b51q8qlc5q4d9x";
+      }
+      {
+        name = "tslint";
+        publisher = "eg2";
+        version = "1.0.43";
+        sha256 = "0p0lvkip083vx1y5p53ksy9457x76ylxlc2kf7zdb09vqm6ss8z3";
+      }
+      {
+        name = "ayu-one-dark";
+        publisher = "faceair";
+        version = "1.1.1";
+        sha256 = "104ab878n0bi2nnwxi7xi7aj2rzbdnbmv14xwcy8hd94gc89zshw";
+      }
+      {
+        name = "vscode-pull-request-github";
+        publisher = "GitHub";
+        version = "0.6.0";
+        sha256 = "05csvsbbc6g43c6zkyh36vzr9a47gk2vdyvi1kvz7vcfpnmp4459";
+      }
+      {
+        name = "asciidoctor-vscode";
+        publisher = "joaompinto";
+        version = "2.4.0";
+        sha256 = "0wkajfcakl1iqfcf58j05drcgvr5fhqrqzayylxzzvgnn4x172d4";
+      }
+      {
+        name = "vscode-typescript-tslint-plugin";
+        publisher = "ms-vscode";
+        version = "1.0.0";
+        sha256 = "155frrf8fs0c6sgs532cxgwvxzinkgg4k0ywsbl7zzjip8qqmm0g";
+      }
+      {
+        name = "vscode-direnv";
+        publisher = "Rubymaniac";
+        version = "0.0.2";
+        sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
+      }
+      {
+        name = "rust";
+        publisher = "rust-lang";
+        version = "0.6.1";
+        sha256 = "0f66z6b374nvnrn7802dg0xz9f8wq6sjw3sb9ca533gn5jd7n297";
+      }
+    ];
+  };
 in
 {
   imports = [
@@ -49,7 +138,7 @@ in
      android-studio
      skanlite
      plasma-browser-integration
-     vscode
+     myvscode
   ];
 
 
