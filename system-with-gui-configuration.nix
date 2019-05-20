@@ -139,6 +139,7 @@ in
      skanlite
      plasma-browser-integration
      myvscode
+     riot-desktop
   ];
 
 
