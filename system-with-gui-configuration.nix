@@ -93,6 +93,12 @@ let
         version = "0.6.1";
         sha256 = "0f66z6b374nvnrn7802dg0xz9f8wq6sjw3sb9ca533gn5jd7n297";
       }
+      {
+        name = "crates";
+        publisher = "serayuzgur";
+        version = "0.4.3";
+        sha256 = "13wz5pb8l5hx52iapf1ak262v3zcv5d3ll1zvkb2iwj982056k6s";
+      }
     ];
   };
 in
