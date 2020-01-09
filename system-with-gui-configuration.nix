@@ -6,15 +6,98 @@
 
 let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
+  rust-analyzer = pkgs.rustPlatform.buildRustPackage rec {
+    name = "rust-analyzer-${version}";
+    version = "8f1792fde233799fe3335032834ee7281d78e55b";
+    src = pkgs.fetchFromGitHub {
+      owner = "rust-analyzer";
+      repo = "rust-analyzer";
+      rev = "${version}";
+      sha256 = "17fv46y42xw427z16dskw05skq460dbmck1dbkr2nr2as2cpz9b5";
+    };
+
+    cargoSha256 = "1ywb114sc2bakwz672ln3rww2n0mrsqz176xv9mn54bbg39mi02c";
+
+    cargoBuildFlags = [ "-p ra_lsp_server" ];
+
+    cargoTestFlags = [ "--all" "--exclude xtask" ];
+
+    RUST_SRC_PATH = pkgs.rustPlatform.rustcSrc;
+
+    nativeBuildInputs = [ pkgs.rustfmt ];
+  };
+  rustAnalyzerVscodeNodePackages =
+    import ./rust-analyzer/node-composition.nix {
+      inherit (pkgs) nodejs pkgs;
+      inherit (pkgs.stdenv.hostPlatform) system;
+    };
+  rust-analyzer-vscode-node = rustAnalyzerVscodeNodePackages.package.override {
+    src = pkgs.stdenv.mkDerivation rec {
+      name = "rst-test";
+      version = rust-analyzer.version;
+      src = pkgs.fetchFromGitHub {
+        owner = "rust-analyzer";
+        repo = "rust-analyzer";
+        rev = "${version}";
+        sha256 = "17fv46y42xw427z16dskw05skq460dbmck1dbkr2nr2as2cpz9b5";
+      };
+      postPatch = ''
+        substituteInPlace editors/code/src/config.ts --replace "ra_lsp_server" "${rust-analyzer}/bin/ra_lsp_server"
+        substituteInPlace editors/code/package.json --replace "ra_lsp_server" "${rust-analyzer}/bin/ra_lsp_server"
+      '';
+      installPhase = ''
+        mkdir -p $out
+        cp -R editors/code/* $out/
+      '';
+    };
+    postInstall = ''npm run compile'';
+  };
+  rust-analyzer-vscode = pkgs.vscode-utils.buildVscodeExtension rec {
+    name = "ra-lsp-${version}";
+    vscodeExtUniqueId = "${name}";
+
+    version = rust-analyzer-vscode-node.version;
+    src = rust-analyzer-vscode-node;
+    sourceRoot = "${rust-analyzer-vscode-node.name}/lib/node_modules/ra-lsp";
+
+    buildPhase = ''
+      rm -rf tsconfig.json tslint.json package-lock.json src
+    '';
+  };
   myvscode = pkgs.vscode-with-extensions.override {
     # When the extension is already available in the default extensions set.
     vscodeExtensions = with pkgs.vscode-extensions; [
       bbenoist.Nix
       llvm-org.lldb-vscode
       vscodevim.vim
+      #rust-analyzer-vscode
     ]
     # Concise version from the vscode market place when not available in the default set.
     ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "dart-code";
+        publisher = "Dart-Code";
+        version = "3.3.0";
+        sha256 = "138l4055wg7dz0lxz0f0x8yhj224339xhvpwd2z6amr31pf0lfqv";
+      }
+      {
+        name = "flutter";
+        publisher = "Dart-Code";
+        version = "3.3.0";
+        sha256 = "0dadrrj45v38303s9f50mbsghkm0y0xz6znmlpa9d4k6w0vbywnq";
+      }
+      {
+        name = "vscode-pull-request-github";
+        publisher = "GitHub";
+        version = "0.10.0";
+        sha256 = "07ii3j0h106xhg3mdy1d08447yx9c4db189h86qsdmdjbygvry8s";
+      }
+      {
+        name = "vscode-direnv";
+        publisher = "Rubymaniac";
+        version = "0.0.2";
+        sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
+      }
       {
         name = "one-monokai";
         publisher = "azemoh";
@@ -28,18 +111,6 @@ let
         sha256 = "08lhzhrn6p0xwi0hcyp6lj9bvpfj87vr99klzsiy8ji7621dzql3";
       }
       {
-        name = "dart-code";
-        publisher = "Dart-Code";
-        version = "2.25.0";
-        sha256 = "1qh85174npip3hndrvm1ysraq6vz7yslr4286k8nnwymrnzml4pk";
-      }
-      {
-        name = "flutter";
-        publisher = "Dart-Code";
-        version = "2.25.0";
-        sha256 = "0bpaz57d2bdc8kv56m7p6p4ms6qziknirc4xa70i5dc1b0jdk74m";
-      }
-      {
         name = "vscode-wasm";
         publisher = "dtsvet";
         version = "1.2.1";
@@ -48,14 +119,14 @@ let
       {
         name = "an-old-hope-theme-vscode";
         publisher = "dustinsanders";
-        version = "3.2.1";
-        sha256 = "020h5iqh3d6qsqyv4ac7z35pyrwd1sjkh0b9w2b51q8qlc5q4d9x";
+        version = "4.1.0";
+        sha256 = "0ik4qm0d742vq1fy8wf56i6bbpcn44g1i3bzx09x30vrzpwddayn";
       }
       {
         name = "tslint";
         publisher = "eg2";
-        version = "1.0.43";
-        sha256 = "0p0lvkip083vx1y5p53ksy9457x76ylxlc2kf7zdb09vqm6ss8z3";
+        version = "1.0.44";
+        sha256 = "11q8kmm7k3pllwgflsjn20d1w58x3r0vl3i2b32bnbk2gzwcjmib";
       }
       {
         name = "ayu-one-dark";
@@ -64,40 +135,28 @@ let
         sha256 = "104ab878n0bi2nnwxi7xi7aj2rzbdnbmv14xwcy8hd94gc89zshw";
       }
       {
-        name = "vscode-pull-request-github";
-        publisher = "GitHub";
-        version = "0.6.0";
-        sha256 = "05csvsbbc6g43c6zkyh36vzr9a47gk2vdyvi1kvz7vcfpnmp4459";
-      }
-      {
         name = "asciidoctor-vscode";
         publisher = "joaompinto";
-        version = "2.4.0";
-        sha256 = "0wkajfcakl1iqfcf58j05drcgvr5fhqrqzayylxzzvgnn4x172d4";
-      }
-      {
-        name = "vscode-typescript-tslint-plugin";
-        publisher = "ms-vscode";
-        version = "1.0.0";
-        sha256 = "155frrf8fs0c6sgs532cxgwvxzinkgg4k0ywsbl7zzjip8qqmm0g";
-      }
-      {
-        name = "vscode-direnv";
-        publisher = "Rubymaniac";
-        version = "0.0.2";
-        sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
-      }
-      {
-        name = "rust";
-        publisher = "rust-lang";
-        version = "0.6.1";
-        sha256 = "0f66z6b374nvnrn7802dg0xz9f8wq6sjw3sb9ca533gn5jd7n297";
+        version = "2.7.6";
+        sha256 = "1mklszqcjn9sv6yv1kmbmswz5286mrbnhazs764f38l0kjnrx7qm";
       }
       {
         name = "crates";
         publisher = "serayuzgur";
         version = "0.4.3";
         sha256 = "13wz5pb8l5hx52iapf1ak262v3zcv5d3ll1zvkb2iwj982056k6s";
+      }
+      {
+        name = "vscode-gitweblinks";
+        publisher = "reduckted";
+        version = "1.4.0";
+        sha256 = "0s5iiakpfbn4anbbfw39njlf9rbjaxcf7p9zq8ryx3x0sddw449a";
+      }
+      {
+        name = "code-spell-checker";
+        publisher = "streetsidesoftware";
+        version = "1.7.18";
+        sha256 = "1n9xi08qd8j9vpy50lsh2r73c36y12cw7n87f15rc7fws6ws3x0v";
       }
     ];
   };
@@ -146,6 +205,12 @@ in
      plasma-browser-integration
      myvscode
      riot-desktop
+     # Next 3 are recommended by emacs doom
+     coreutils
+     fd
+     clang
+     editorconfig-core-c
+     rust-analyzer
   ];
 
 
@@ -208,4 +273,70 @@ in
   };
 
   services.teamviewer.enable = true;
+
+  networking.wg-quick.interfaces = {
+    wg0 = {
+      address = [ "10.1.10.20/32" ];
+      dns = [ "10.1.1.1" "1.1.1.1" "1.0.0.1" ];
+      privateKeyFile = "/home/bastian/Documents/Parity/wireguard_private.key";
+      listenPort = 57465;
+      mtu = 1360;
+
+      peers = [
+        {
+          publicKey = "8vH2fqIEbDRBUkwivbwyywwi1xF0U603PcN+3N731zk=";
+          allowedIPs = [ "10.1.1.0/24" ];
+          endpoint = "212.227.252.235:443";
+        }
+      ];
+    };
+  };
+
+  services.emacs.enable = true;
+
+  #networking.useNetworkd = true;
+  #services.resolved.enable = true;
+  #boot.extraModulePackages = [ config.boot.kernelPackages.wireguard ];
+  #systemd.network = {
+  #  enable = true;
+  #  netdevs = {
+  #    "10-wg0" = {
+  #      netdevConfig = {
+  #        Kind = "wireguard";
+  #        MTUBytes = "1360";
+  #        Name = "wg0";
+  #      };
+  #      # See also man systemd.netdev
+  #      extraConfig = ''
+  #        [WireGuard]
+  #        # Currently, the private key must be world readable, as the resulting netdev file will reside in the Nix store.
+  #        PrivateKey=aOiVaMSB+hKMjUPEbmULe3gpablGJdcqTQtTfuZ9hkI=
+  #        ListenPort=57465
+
+  #        [WireGuardPeer]
+  #        PublicKey=8vH2fqIEbDRBUkwivbwyywwi1xF0U603PcN+3N731zk=
+  #        AllowedIPs=10.1.1.0/24
+  #        Endpoint=212.227.252.235:443
+  #      '';
+  #    };
+  #  };
+  #  networks = {
+  #    # See also man systemd.network
+  #    "10-wg0".extraConfig = ''
+  #      [Match]
+  #      Name=wg0
+
+  #      [Network]
+  #      DNS=10.1.1.1
+  #      DNS=1.1.1.1
+  #      DNS=1.0.0.1
+
+  #      [Address]
+  #      Address=10.1.10.20/32
+
+  #      [Route]
+  #      Destination = 10.1.1.0/24
+  #    '';
+  #  };
+  #};
 }

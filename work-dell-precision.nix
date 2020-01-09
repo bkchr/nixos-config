@@ -12,14 +12,13 @@
     /etc/nixos/hardware-configuration.nix
   ];
 
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
+  boot.initrd.luks.devices = {
+    root = {
       device = "/dev/disk/by-uuid/b1096ab1-079e-44b3-93ac-f502a1b9d168";
       preLVM = true;
       allowDiscards = true;
-    }
-  ];
+    };
+  };
 
   networking.hostName = "BastiDell-Nixos"; # Define your hostname.
 
@@ -32,4 +31,8 @@
     videoDrivers = [ "modesetting" ];
   };
   services.sshd.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    zoom-us
+  ];
 }

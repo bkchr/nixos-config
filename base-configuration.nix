@@ -46,10 +46,8 @@ in
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   #Select internationalisation properties.
-  i18n = {
-     consoleFont = "Lat2-Terminus16";
-     defaultLocale = "en_US.UTF-8";
-  };
+  console.font = "Lat2-Terminus16";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   # Timesync
   services.timesyncd.enable = true;
@@ -174,4 +172,6 @@ in
       enableSSHSupport = true;
     };
   };
+
+  services.lorri.enable = true;
 }
