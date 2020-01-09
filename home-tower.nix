@@ -23,10 +23,9 @@
   environment.systemPackages = with pkgs; [
     steam
     teamspeak_client
-    playonlinux
-    wineStaging
     vagrant
     virtualbox
+    discord
   ];
 
   services.sshd.enable = true;
