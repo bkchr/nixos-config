@@ -172,6 +172,4 @@ in
       enableSSHSupport = true;
     };
   };
-
-  services.lorri.enable = true;
 }

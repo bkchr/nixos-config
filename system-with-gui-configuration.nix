@@ -168,6 +168,7 @@ in
     # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
     ./base-configuration.nix
+    ./home/default.nix
   ];
 
   hardware = {
@@ -207,13 +208,8 @@ in
      plasma-browser-integration
      myvscode
      riot-desktop
-     # Next 3 are recommended by emacs doom
-     coreutils
-     fd
-     clang
-     editorconfig-core-c
+
      rust-analyzer
-     multimarkdown
   ];
 
 
@@ -294,8 +290,6 @@ in
       ];
     };
   };
-
-  services.emacs.enable = true;
 
   #networking.useNetworkd = true;
   #services.resolved.enable = true;
