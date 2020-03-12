@@ -8,23 +8,25 @@ let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
   rust-analyzer = pkgs.rustPlatform.buildRustPackage rec {
     name = "rust-analyzer-${version}";
-    version = "8f1792fde233799fe3335032834ee7281d78e55b";
+    version = "1817b804a5f8d3a893f87fa60962b79cdc826636";
     src = pkgs.fetchFromGitHub {
-      owner = "rust-analyzer";
+      owner = "bkchr";
       repo = "rust-analyzer";
       rev = "${version}";
-      sha256 = "17fv46y42xw427z16dskw05skq460dbmck1dbkr2nr2as2cpz9b5";
+      sha256 = "18zd9lyh17ja7rd3m325dzyg3xhs3pm5wpwrxgqavm5vkw4yc0s7";
     };
 
-    cargoSha256 = "1ywb114sc2bakwz672ln3rww2n0mrsqz176xv9mn54bbg39mi02c";
+    cargoSha256 = "1wz8pa21h312jh6jbdq7iminla2mf36mw0q4grgawqwx5fkagmp5";
 
-    cargoBuildFlags = [ "-p ra_lsp_server" ];
+    cargoBuildFlags = [ "-p rust-analyzer" ];
 
     cargoTestFlags = [ "--all" "--exclude xtask" ];
 
     RUST_SRC_PATH = pkgs.rustPlatform.rustcSrc;
 
     nativeBuildInputs = [ pkgs.rustfmt ];
+
+    doCheck = false;
   };
   rustAnalyzerVscodeNodePackages =
     import ./rust-analyzer/node-composition.nix {
@@ -211,6 +213,7 @@ in
      clang
      editorconfig-core-c
      rust-analyzer
+     multimarkdown
   ];
 
 
@@ -285,7 +288,7 @@ in
       peers = [
         {
           publicKey = "8vH2fqIEbDRBUkwivbwyywwi1xF0U603PcN+3N731zk=";
-          allowedIPs = [ "10.1.1.0/24" ];
+          allowedIPs = [ "10.1.0.0/16" "10.11.0.0/19" "10.14.0.0/19" "10.200.0.0/19" "10.100.0.0/19" ];
           endpoint = "212.227.252.235:443";
         }
       ];
