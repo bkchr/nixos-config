@@ -277,7 +277,7 @@ in
     wg0 = {
       address = [ "10.1.10.20/32" ];
       dns = [ "10.1.1.1" "1.1.1.1" "1.0.0.1" ];
-      privateKeyFile = "/home/bastian/Documents/Parity/wireguard_private.key";
+      privateKeyFile = "/home/bastian/.wireguard/parity.key";
       listenPort = 57465;
       mtu = 1360;
 

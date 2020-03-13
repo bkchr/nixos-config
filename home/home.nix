@@ -40,4 +40,12 @@
       recursive = true;
     };
   };
+
+  # Generate the keyfile for wireguard 
+  home.file.".wireguard/parity.key.generate" = {
+    text = "nothing";
+    onChange = ''
+      ${pkgs.pass}/bin/pass Work/Parity/wireguard > $HOME/.wireguard/parity.key
+    '';
+  };
 }
