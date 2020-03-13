@@ -16,4 +16,7 @@ in
     users.bastian = (import ./home.nix);
     useGlobalPkgs = true;
   };
+
+  # Find a better way to set this..
+  environment.variables.DOOMLOCALDIR = "~/.cache/doom-emacs/";
 }
