@@ -272,6 +272,7 @@ in
     fonts = with pkgs; [
       source-code-pro
       emacs-all-the-icons-fonts
+      noto-fonts-emoji
     ];
   };
 
