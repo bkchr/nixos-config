@@ -243,7 +243,10 @@ in
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
+  # Networking
   networking.networkmanager.enable = true;
+  networking.networkmanager.wifi.backend = "iwd";
+  networking.wireless.iwd.enable = true;
 
   # Open TCP and UDP port ranges for kdeconnect
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
