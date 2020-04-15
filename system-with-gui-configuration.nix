@@ -208,6 +208,7 @@ in
      plasma-browser-integration
      myvscode
      riot-desktop
+     zulip
 
      rust-analyzer
   ];
