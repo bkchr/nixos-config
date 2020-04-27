@@ -6,11 +6,11 @@
   (map! :map rustic-mode-map :localleader ("o" #'rustic-open-dependency-file))
   (setq rustic-lsp-server 'rust-analyzer))
 
-(after! lsp
+(after! lsp-rust
   ;; disable the eldoc stuff
   (setq lsp-eldoc-hook nil)
   (setq lsp-enable-symbol-highlighting nil)
-  ;; (setq lsp-rust-analyzer-cargo-watch-command "remote -h check --")
+  (setq lsp-rust-analyzer-cargo-watch-args ["--target-dir" "target/rust-analyzer"])
   (setq lsp-rust-analyzer-use-client-watching nil)
 )
 

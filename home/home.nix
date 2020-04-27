@@ -31,7 +31,8 @@
       source = ./files/.emacs.d;
       recursive = true;
       onChange = ''
-        $HOME/.emacs.d/bin/doom --yes --localdir $HOME/.cache/doom-emacs refresh
+        rm -rf $HOME/.cache/doom-emacs
+        $HOME/.emacs.d/bin/doom --yes --localdir $HOME/.cache/doom-emacs update
       '';
     };
 
