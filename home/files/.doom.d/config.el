@@ -12,6 +12,8 @@
   (setq lsp-enable-symbol-highlighting nil)
   (setq lsp-rust-analyzer-cargo-watch-args ["--target-dir" "target/rust-analyzer"])
   (setq lsp-rust-analyzer-use-client-watching nil)
+  (setq lsp-rust-analyzer-proc-macro-enable t)
+  (setq lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
 )
 
 (setq display-line-numbers-type 'relative)
