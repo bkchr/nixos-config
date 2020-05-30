@@ -31,7 +31,7 @@
       source = ./files/.emacs.d;
       recursive = true;
       onChange = ''
-        $HOME/.emacs.d/bin/doom --yes --localdir $HOME/.cache/doom-emacs refresh
+        $HOME/.emacs.d/bin/doom --yes --localdir $HOME/.cache/doom-emacs sync
         $HOME/.emacs.d/bin/doom --yes --localdir $HOME/.cache/doom-emacs update
       '';
     };
@@ -48,5 +48,17 @@
     onChange = ''
       ${pkgs.pass}/bin/pass Work/Parity/wireguard > $HOME/.wireguard/parity.key
     '';
+  };
+
+  programs.git = {
+    enable = true;
+
+    userEmail = "git@kchr.de";
+    userName = "Bastian Köcher";
+    
+    # Enable the delta syntax highlighter
+    delta.enable = true;
+
+    signing.key = "CBC7115E48718492";
   };
 }
