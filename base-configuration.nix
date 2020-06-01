@@ -10,7 +10,7 @@ let
     home = "/home/bastian";
     description = "Bastian Köcher";
     # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" "input" ];
     uid = 1000;
   };
   # Make pass use gpg2 and add `pass-otp`
