@@ -10,13 +10,17 @@ let
     home = "/home/bastian";
     description = "Bastian Köcher";
     # grant access to sudo and to the network
-    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" "input" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" "input" "plugdev" ];
     uid = 1000;
   };
   # Make pass use gpg2 and add `pass-otp`
   pass = (pkgs.pass.override { gnupg = pkgs.gnupg22; }).withExtensions (ext: [ext.pass-otp]);
 in
 {
+  imports = [
+    ./modules/zsa
+  ];
+
   nix = {
     distributedBuilds = true;
     buildMachines = [
@@ -53,7 +57,7 @@ in
   services.timesyncd.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Europe/Berlin";
 
   # Build every package in a sandbox
   nix.useSandbox = true;

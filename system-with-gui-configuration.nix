@@ -211,6 +211,9 @@ in
      zulip
 
      rust-analyzer
+
+     # Zsa/ergodox
+     wally-cli
   ];
 
 
@@ -296,4 +299,6 @@ in
       ];
     };
   };
+
+  hardware.keyboard.zsa.enable = true;
 }
