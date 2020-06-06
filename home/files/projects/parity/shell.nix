@@ -5,7 +5,7 @@ let
 in
   pkgs.mkShell {
     buildInputs = [
-      myrust openssl pkgconfig cmake python3 llvmPackages.clang-unwrapped gnuplot libbfd libopcodes libunwind autoconf automake libtool rsync yarn nodejs
+      myrust openssl pkgconfig cmake python3 llvmPackages.clang-unwrapped gnuplot libbfd libopcodes libunwind autoconf automake libtool rsync yarn nodejs nodePackages.typescript
     ];
     LIBCLANG_PATH="${llvmPackages.libclang}/lib";
     RUST_SRC_PATH="${myrust}/lib/rustlib/src/rust/src";
