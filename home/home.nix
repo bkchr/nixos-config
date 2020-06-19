@@ -65,4 +65,11 @@
       pull.rebase = "false";
     };
   };
+
+  # Pass configs
+  services.password-store-sync.enable = true;
+  programs.password-store = {
+    enable = true;
+    package = (pkgs.pass.override { gnupg = pkgs.gnupg22; }).withExtensions (ext: [ext.pass-otp]);
+  };
 }

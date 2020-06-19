@@ -13,8 +13,6 @@ let
     extraGroups = [ "wheel" "networkmanager" "docker" "adbusers" "scanner" "lp" "audio" "video" "input" "plugdev" ];
     uid = 1000;
   };
-  # Make pass use gpg2 and add `pass-otp`
-  pass = (pkgs.pass.override { gnupg = pkgs.gnupg22; }).withExtensions (ext: [ext.pass-otp]);
 in
 {
   imports = [
@@ -85,7 +83,6 @@ in
      ntfs3g
      ripgrep
 
-     pass
      gnupg22
      yubikey-personalization
   ];
