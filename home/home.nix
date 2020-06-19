@@ -60,5 +60,9 @@
     delta.enable = true;
 
     signing.key = "CBC7115E48718492";
+
+    extraConfig = {
+      pull.rebase = "false";
+    };
   };
 }
