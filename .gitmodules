@@ -4,9 +4,6 @@
 [submodule "nixpkgs"]
 	path = nixpkgs
 	url = git@github.com:bkchr/nixpkgs.git
-[submodule "overlays/wabt-overlay"]
-	path = overlays/wabt-overlay
-	url = git@github.com:bkchr/wabt-overlay.git
 [submodule "home/files/.emacs.d"]
 	path = home/files/.emacs.d
 	url = git@github.com:hlissner/doom-emacs.git
