@@ -8,15 +8,15 @@ let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
   rust-analyzer = pkgs.rustPlatform.buildRustPackage rec {
     name = "rust-analyzer-${version}";
-    version = "a0f24455ddc474ee288849b79aa1fc8ca7829385";
+    version = "c9c518e5e9761bf35d466c47c57c3a1358b56b3c";
     src = pkgs.fetchFromGitHub {
       owner = "rust-analyzer";
       repo = "rust-analyzer";
       rev = "${version}";
-      sha256 = "13wsqs46mxwckilh61ws0vz2684s0jl1154hw6pjvbfxzl48bfyj";
+      sha256 = "0bp6byaq9g3y2nxpflyj703q3bjfr2lf0wlb1b2kkjvzfnyygj5w";
     };
 
-    cargoSha256 = "1plwxwq7yagzsql81ipghmr99i351y8adqv71q3awcqfcxy9jm0i";
+    cargoSha256 = "019x2dmvhnxj0mc8vvipxfz5b8wjk9j8751rm66sfk01dhryg654";
 
     cargoBuildFlags = [ "-p rust-analyzer" ];
 
@@ -208,7 +208,6 @@ in
      plasma-browser-integration
      myvscode
      riot-desktop
-     zulip
 
      rust-analyzer
 
