@@ -8,15 +8,15 @@ let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
   rust-analyzer = pkgs.rustPlatform.buildRustPackage rec {
     name = "rust-analyzer-${version}";
-    version = "c9c518e5e9761bf35d466c47c57c3a1358b56b3c";
+    version = "e96bfd812a0f883bc9aa6b5ebe3b0a712c860487";
     src = pkgs.fetchFromGitHub {
       owner = "rust-analyzer";
       repo = "rust-analyzer";
       rev = "${version}";
-      sha256 = "0bp6byaq9g3y2nxpflyj703q3bjfr2lf0wlb1b2kkjvzfnyygj5w";
+      sha256 = "07xd9gwzjqnjsb5rnxfa9vxc6dmh04mbd1dcwxsz9fv9dcnsx21l";
     };
 
-    cargoSha256 = "019x2dmvhnxj0mc8vvipxfz5b8wjk9j8751rm66sfk01dhryg654";
+    cargoSha256 = "06mg6xsm6ga1k0a51r1yb0ff54wr5jpha4575svmzkdp6b5105l2";
 
     cargoBuildFlags = [ "-p rust-analyzer" ];
 
