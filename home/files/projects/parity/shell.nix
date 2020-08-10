@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 let
   pkgs = import <nixpkgs> {};
-  myrust = ((rustChannelOf { date = "2020-08-04"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2020-07-27"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
 in
   pkgs.mkShell {
     buildInputs = [
