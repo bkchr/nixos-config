@@ -61,6 +61,7 @@
        lsp
        magit             ; a git porcelain for Emacs
        pass              ; password manager for nerds
+       pdf
 
        :lang
        cc                ; C/C++/Obj-C madness
@@ -72,7 +73,7 @@
        nix               ; I hereby declare "nix geht mehr!"
        (rust +lsp)              ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        sh                ; she sells {ba,z,fi}sh shells on the C xor
-       (org +dragndrop)
+       (org +dragndrop +pretty +roam +gnuplot)
 
        :config
        (default +bindings +smartparens))

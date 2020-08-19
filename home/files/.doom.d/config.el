@@ -51,3 +51,21 @@
 (after! company
   ;; Trigger completion immediately.
   (setq company-idle-delay 0))
+
+(after! org
+  (defun org-get-agenda-files-recursively (dir)
+    "Get org agenda files from root DIR."
+    (directory-files-recursively dir "\.org$"))
+  
+  (defun org-set-agenda-files-recursively (dir)
+    "Set org-agenda files from root DIR."
+    (setq org-agenda-files 
+      (org-get-agenda-files-recursively dir)))
+  
+  (defun org-add-agenda-files-recursively (dir)
+    "Add org-agenda files from root DIR."
+    (nconc org-agenda-files 
+      (org-get-agenda-files-recursively dir)))
+  (org-set-agenda-files-recursively "~/org") 
+  (setq org-roam-directory "~/org/roam/")
+  (setq org-directory "~/org/"))

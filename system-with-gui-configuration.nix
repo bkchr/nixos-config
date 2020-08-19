@@ -213,6 +213,10 @@ in
 
      # Zsa/ergodox
      wally-cli
+
+     # Emacs
+     sqlite
+     graphviz
   ];
 
 
