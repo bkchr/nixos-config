@@ -68,4 +68,14 @@
       (org-get-agenda-files-recursively dir)))
   (org-set-agenda-files-recursively "~/org") 
   (setq org-roam-directory "~/org/roam/")
-  (setq org-directory "~/org/"))
+  (setq org-directory "~/org/")
+
+  (setq org-capture-templates
+      `(("i" "inbox" entry (file ,"~/org/inbox.org")
+         "* TODO %?")
+        ("l" "link" entry (file ,"~/org/inbox.org")
+         "* TODO %(org-cliplink-capture)" :immediate-finish t)
+        ("c" "org-protocol-capture" entry (file ,"~/org/inbox.org")
+         "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
+  (setq org-todo-keywords
+  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))))
