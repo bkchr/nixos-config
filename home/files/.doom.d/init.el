@@ -12,7 +12,7 @@
 
        :completion
        (company +childframe)
-       (ivy +childframe +icons)
+       (ivy +icons +fuzzy +childframe)
 
        :ui
        doom              ; what makes DOOM look the way it does
