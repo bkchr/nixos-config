@@ -31,7 +31,7 @@
 
 ;; Make flycheck use direnv to get the correct env for finding an executable
 (setq flycheck-executable-find
-     (lambda (cmd) (direnv-update-environment default-directory)(executable-find cmd)))
+     (lambda (cmd) (envrc--update-env default-directory)(executable-find cmd)))
 
 (defun save-all ()
   (interactive)
@@ -78,4 +78,4 @@
         ("c" "org-protocol-capture" entry (file ,"~/org/inbox.org")
          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
   (setq org-todo-keywords
-  '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))))
+  '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DONE(d)"))))

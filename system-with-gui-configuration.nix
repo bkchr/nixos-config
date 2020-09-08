@@ -8,15 +8,15 @@ let
   yakuake_autostart = (pkgs.makeAutostartItem { name = "yakuake"; package = pkgs.yakuake; srcPrefix = "org.kde.";  });
   rust-analyzer = pkgs.rustPlatform.buildRustPackage rec {
     name = "rust-analyzer-${version}";
-    version = "7d95a8447cf1874dac6381b5b1e644093b72e435";
+    version = "0275b08d1521606fa733f76fe5d5707717456fb4";
     src = pkgs.fetchFromGitHub {
       owner = "rust-analyzer";
       repo = "rust-analyzer";
       rev = "${version}";
-      sha256 = "17ng8b5wwjyh73yip7ls41zwjjqwlsyhq972gbk7vica3qpk0s12";
+      sha256 = "1yz3s40m4snw3h480cz562mbh5yrsqliynchra0wvyhajg9n8w0s";
     };
 
-    cargoSha256 = "0izymy9mg9g7x1ck6yrmajh9zbdb1gknahqvaxmzisfj8lbrcd6w";
+    cargoSha256 = "1np626fdxqqbrz2fyi635k9bh9f4qmagnl4s70ny6lgznm3j7c95";
 
     cargoBuildFlags = [ "-p rust-analyzer" ];
 
@@ -208,6 +208,7 @@ in
      plasma-browser-integration
      myvscode
      element-desktop
+     thunderbird-78
 
      rust-analyzer
 
