@@ -28,10 +28,11 @@
 
 (setq whitespace-style '(face tabs tab-mark spaces space-mark trailing lines-tail))
 
-
 ;; Make flycheck use direnv to get the correct env for finding an executable
+;; We also need to enable `envrc-mode` manually for this buffer to make sure we set the
+;; env variables for this buffer (the mode is probably enabled later).
 (setq flycheck-executable-find
-     (lambda (cmd) (envrc--update-env default-directory)(executable-find cmd)))
+     (lambda (cmd) (envrc-mode 1)(envrc--update-env default-directory)(executable-find cmd)))
 
 (defun save-all ()
   (interactive)
