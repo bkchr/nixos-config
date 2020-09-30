@@ -75,6 +75,7 @@ in
      plasma-browser-integration
      element-desktop
      thunderbird-78
+     spotify
 
      rust-analyzer
 
