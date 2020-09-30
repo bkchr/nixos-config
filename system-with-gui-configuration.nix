@@ -28,140 +28,6 @@ let
 
     doCheck = false;
   };
-  rustAnalyzerVscodeNodePackages =
-    import ./rust-analyzer/node-composition.nix {
-      inherit (pkgs) nodejs pkgs;
-      inherit (pkgs.stdenv.hostPlatform) system;
-    };
-  rust-analyzer-vscode-node = rustAnalyzerVscodeNodePackages.package.override {
-    src = pkgs.stdenv.mkDerivation rec {
-      name = "rst-test";
-      version = rust-analyzer.version;
-      src = pkgs.fetchFromGitHub {
-        owner = "rust-analyzer";
-        repo = "rust-analyzer";
-        rev = "${version}";
-        sha256 = "17fv46y42xw427z16dskw05skq460dbmck1dbkr2nr2as2cpz9b5";
-      };
-      postPatch = ''
-        substituteInPlace editors/code/src/config.ts --replace "ra_lsp_server" "${rust-analyzer}/bin/ra_lsp_server"
-        substituteInPlace editors/code/package.json --replace "ra_lsp_server" "${rust-analyzer}/bin/ra_lsp_server"
-      '';
-      installPhase = ''
-        mkdir -p $out
-        cp -R editors/code/* $out/
-      '';
-    };
-    postInstall = ''npm run compile'';
-  };
-  rust-analyzer-vscode = pkgs.vscode-utils.buildVscodeExtension rec {
-    name = "ra-lsp-${version}";
-    vscodeExtUniqueId = "${name}";
-
-    version = rust-analyzer-vscode-node.version;
-    src = rust-analyzer-vscode-node;
-    sourceRoot = "${rust-analyzer-vscode-node.name}/lib/node_modules/ra-lsp";
-
-    buildPhase = ''
-      rm -rf tsconfig.json tslint.json package-lock.json src
-    '';
-  };
-  myvscode = pkgs.vscode-with-extensions.override {
-    # When the extension is already available in the default extensions set.
-    vscodeExtensions = with pkgs.vscode-extensions; [
-      bbenoist.Nix
-      llvm-org.lldb-vscode
-      vscodevim.vim
-      #rust-analyzer-vscode
-    ]
-    # Concise version from the vscode market place when not available in the default set.
-    ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "dart-code";
-        publisher = "Dart-Code";
-        version = "3.3.0";
-        sha256 = "138l4055wg7dz0lxz0f0x8yhj224339xhvpwd2z6amr31pf0lfqv";
-      }
-      {
-        name = "flutter";
-        publisher = "Dart-Code";
-        version = "3.3.0";
-        sha256 = "0dadrrj45v38303s9f50mbsghkm0y0xz6znmlpa9d4k6w0vbywnq";
-      }
-      {
-        name = "vscode-pull-request-github";
-        publisher = "GitHub";
-        version = "0.10.0";
-        sha256 = "07ii3j0h106xhg3mdy1d08447yx9c4db189h86qsdmdjbygvry8s";
-      }
-      {
-        name = "vscode-direnv";
-        publisher = "Rubymaniac";
-        version = "0.0.2";
-        sha256 = "1gml41bc77qlydnvk1rkaiv95rwprzqgj895kxllqy4ps8ly6nsd";
-      }
-      {
-        name = "one-monokai";
-        publisher = "azemoh";
-        version = "0.3.7";
-        sha256 = "0mv7ibhj66vsp24yy711hlan0rsvfiw5ba8g5x07c48r1nlxm6yj";
-      }
-      {
-        name = "better-toml";
-        publisher = "bungcip";
-        version = "0.3.2";
-        sha256 = "08lhzhrn6p0xwi0hcyp6lj9bvpfj87vr99klzsiy8ji7621dzql3";
-      }
-      {
-        name = "vscode-wasm";
-        publisher = "dtsvet";
-        version = "1.2.1";
-        sha256 = "1nvfdl1hqm655l60v9x857wyd7jc3jq7g5qigmydzndg6n6jgwjy";
-      }
-      {
-        name = "an-old-hope-theme-vscode";
-        publisher = "dustinsanders";
-        version = "4.1.0";
-        sha256 = "0ik4qm0d742vq1fy8wf56i6bbpcn44g1i3bzx09x30vrzpwddayn";
-      }
-      {
-        name = "tslint";
-        publisher = "eg2";
-        version = "1.0.44";
-        sha256 = "11q8kmm7k3pllwgflsjn20d1w58x3r0vl3i2b32bnbk2gzwcjmib";
-      }
-      {
-        name = "ayu-one-dark";
-        publisher = "faceair";
-        version = "1.1.1";
-        sha256 = "104ab878n0bi2nnwxi7xi7aj2rzbdnbmv14xwcy8hd94gc89zshw";
-      }
-      {
-        name = "asciidoctor-vscode";
-        publisher = "joaompinto";
-        version = "2.7.6";
-        sha256 = "1mklszqcjn9sv6yv1kmbmswz5286mrbnhazs764f38l0kjnrx7qm";
-      }
-      {
-        name = "crates";
-        publisher = "serayuzgur";
-        version = "0.4.3";
-        sha256 = "13wz5pb8l5hx52iapf1ak262v3zcv5d3ll1zvkb2iwj982056k6s";
-      }
-      {
-        name = "vscode-gitweblinks";
-        publisher = "reduckted";
-        version = "1.4.0";
-        sha256 = "0s5iiakpfbn4anbbfw39njlf9rbjaxcf7p9zq8ryx3x0sddw449a";
-      }
-      {
-        name = "code-spell-checker";
-        publisher = "streetsidesoftware";
-        version = "1.7.18";
-        sha256 = "1n9xi08qd8j9vpy50lsh2r73c36y12cw7n87f15rc7fws6ws3x0v";
-      }
-    ];
-  };
 in
 {
   imports = [
@@ -203,10 +69,10 @@ in
      gwenview
      vlc
      kmail
+     kate
      android-studio
      skanlite
      plasma-browser-integration
-     myvscode
      element-desktop
      thunderbird-78
 
