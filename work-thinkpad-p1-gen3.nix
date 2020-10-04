@@ -50,6 +50,7 @@ in
   hardware.pulseaudio.support32Bit = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.powerManagement.enable = true;
   hardware.nvidia.prime = {
     offload.enable = true;
 
