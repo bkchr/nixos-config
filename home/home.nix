@@ -75,4 +75,9 @@
       PASSWORD_STORE_DIR = "${config.home.homeDirectory}/.password-store";
     };
   };
+
+  # Enable unfree packages for nix-shell
+  home.file.".config/nixpkgs/config.nix" = {
+    text = "{ allowUnfree = true; }";
+  };
 }
