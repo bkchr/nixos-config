@@ -1,5 +1,8 @@
 { config, pkgs, ...}:
 
+let
+  cargo_remote = pkgs.callPackage ./cargo-remote.nix {};
+in
 {
   programs.home-manager.enable = true;
 
@@ -11,6 +14,8 @@
     clang
     editorconfig-core-c
     multimarkdown
+
+    cargo_remote
   ];
   
   # Enable lorri
@@ -79,5 +84,12 @@
   # Enable unfree packages for nix-shell
   home.file.".config/nixpkgs/config.nix" = {
     text = "{ allowUnfree = true; }";
+  };
+
+  # Add cargo remote config
+  home.file.".config/cargo-remote/cargo-remote.toml" = {
+    text = ''
+      remote = "bkchr@10.1.1.54"
+    '';
   };
 }
