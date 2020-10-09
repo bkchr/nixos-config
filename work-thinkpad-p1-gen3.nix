@@ -65,7 +65,7 @@ in
     enable = true;
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "ondemand";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
       # Enable audio power saving for Intel HDA, AC97 devices (timeout in secs).
       # A value of 0 disables, >=1 enables power saving (recommended: 1).
