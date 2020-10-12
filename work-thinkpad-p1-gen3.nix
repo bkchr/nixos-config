@@ -85,4 +85,6 @@ in
       TPSMAPI_ENABLE = "1";
     };
   };
+
+  services.fwupd.enable = true;
 }
