@@ -86,5 +86,7 @@ in
     };
   };
 
+  services.throttled.enable = true;
+
   services.fwupd.enable = true;
 }
