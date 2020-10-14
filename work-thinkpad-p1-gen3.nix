@@ -73,9 +73,7 @@ in
       SOUND_POWER_SAVE_ON_AC = "0";
       SOUND_POWER_SAVE_ON_BAT = "1";
 
-      # Runtime Power Management for PCI(e) bus devices: on=disable, auto=enable.
-      # Default: on (AC), auto (BAT)
-      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_AC = "auto";
       RUNTIME_PM_ON_BAT = "auto";
 
       # Battery feature drivers: 0=disable, 1=enable
