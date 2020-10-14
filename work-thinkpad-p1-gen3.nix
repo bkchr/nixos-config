@@ -87,4 +87,11 @@ in
   services.throttled.enable = true;
 
   services.fwupd.enable = true;
+
+  services.thinkfan.enable = true;
+
+  services.thermald = {
+    enable = true;
+    adaptive = true;
+  };
 }
