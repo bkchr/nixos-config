@@ -19,12 +19,9 @@ in
      enableAllFirmware = true;
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  services.dbus.socketActivated = true;
 
   # List packages installed in system profile. To search by name, run
   # $ nix-env -qaP | grep wget
