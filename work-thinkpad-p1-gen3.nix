@@ -88,7 +88,34 @@ in
 
   services.fwupd.enable = true;
 
-  services.thinkfan.enable = true;
+  services.thinkfan = {
+    enable = true;
+
+    sensors = ''
+      # Entries here discovered by:
+      # find /sys/devices -type f -name "temp*_input"
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp6_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp3_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp7_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp4_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp8_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp5_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp9_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input
+    '';
+
+    levels = ''
+      (0,     0,      42)
+      (1,     40,     47)
+      (2,     45,     52)
+      (3,     50,     57)
+      (4,     55,     62)
+      (5,     60,     77)
+      (7,     73,     93)
+      (127,   85,     32767)
+    '';
+  };
 
   services.thermald = {
     enable = true;
