@@ -52,8 +52,6 @@ in
      thunderbird-78
      spotify
 
-     rust-analyzer-unwrapped
-
      # Zsa/ergodox
      wally-cli
 

@@ -94,15 +94,37 @@ in
     sensors = ''
       # Entries here discovered by:
       # find /sys/devices -type f -name "temp*_input"
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp6_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp3_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp7_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp4_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp8_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp5_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp9_input
-      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon6/temp2_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp6_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp13_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp3_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp10_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp7_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp14_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp4_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp11_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp8_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp1_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp15_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp5_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp12_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp9_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp2_input
+      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp16_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp6_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp3_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp7_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp4_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp8_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp5_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp9_input
+      hwmon /sys/devices/platform/coretemp.0/hwmon/hwmon7/temp2_input
+      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp3_input
+      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp1_input
+      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp2_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone9/hwmon3/temp1_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone10/hwmon4/temp1_input
+      hwmon /sys/devices/virtual/thermal/thermal_zone13/hwmon9/temp1_input
     '';
 
     levels = ''

@@ -2,6 +2,7 @@
 
 let
   cargo_remote = pkgs.callPackage ./cargo-remote.nix {};
+  rust_analyzer_wrapped = pkgs.callPackage ./rust-analyzer-wrapped.nix {};
 in
 {
   programs.home-manager.enable = true;
@@ -16,6 +17,8 @@ in
     multimarkdown
 
     cargo_remote
+
+    rust_analyzer_wrapped
   ];
   
   # Enable lorri
