@@ -9,6 +9,6 @@ writeTextFile {
   destination = "/bin/rust-analyzer-wrapped";
 
   text = ''
-    ${direnv}/bin/direnv exec $(pwd) ${rust-analyzer-unwrapped}/bin/rust-analyzer "$@"
+    SKIP_WASM_BUILD=1 ${direnv}/bin/direnv exec $(pwd) ${rust-analyzer-unwrapped}/bin/rust-analyzer "$@"
   '';
 }
