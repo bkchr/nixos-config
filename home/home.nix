@@ -8,8 +8,7 @@ in
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    # Emacs and recommended packages
-    emacs
+    # Emacs recommended packages
     coreutils
     fd
     clang
@@ -48,6 +47,11 @@ in
       source = ./files/.doom.d;
       recursive = true;
     };
+  };
+
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacsGcc;
   };
 
   # Generate the keyfile for wireguard 

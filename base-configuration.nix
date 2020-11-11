@@ -39,7 +39,12 @@ in
     ];
   };
 
-  nixpkgs.overlays = [ (import /home/bastian/projects/nixos/nixos-config/overlays) ];
+  nixpkgs.overlays = [ 
+    (import /home/bastian/projects/nixos/nixos-config/overlays)
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   hardware = {
      enableAllFirmware = true;
