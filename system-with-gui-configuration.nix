@@ -58,6 +58,8 @@ in
      # Emacs
      sqlite
      graphviz
+
+     yubikey-manager
   ];
 
 
