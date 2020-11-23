@@ -5,8 +5,8 @@ let
   polkadot-launch = (import (pkgs.fetchFromGitHub {
     owner = "bkchr";
     repo = "polkadot-launch";
-    rev = "074aaa5798c76e9309cfda8ee77d3fb3207560b9";
-    sha256 = "1zlv2aanysqd7bkyw4fq3a831sm95kbv2hnnbvrysn878n9fxzbq";
+    rev = "2c4b00c11cfa503cc5f68c4b28ed9b73eddabbc1";
+    sha256 = "02h34rik5hn1gr1qm5z6xndn2jbzx307x2131r39z8sdmf5s4cp5";
   }));
 in
   pkgs.mkShell {
