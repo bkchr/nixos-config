@@ -18,4 +18,5 @@ in
     RUST_SRC_PATH = "${myrust}/lib/rustlib/src/rust/library";
     ROCKSDB_LIB_DIR="${rocksdb}/lib";
     PROTOC = "${protobuf}/bin/protoc";
+    CARGO_INCREMENTAL = "1";
   }
