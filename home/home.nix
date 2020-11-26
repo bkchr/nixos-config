@@ -37,10 +37,6 @@ in
     ".emacs.d" = {
       source = ./files/.emacs.d;
       recursive = true;
-      onChange = ''
-        $HOME/.emacs.d/bin/doom --yes sync
-        $HOME/.emacs.d/bin/doom --yes sync -u
-      '';
     };
 
     ".doom.d" = {
