@@ -10,12 +10,12 @@
   ;; disable the eldoc stuff
   (setq lsp-eldoc-hook nil)
   (setq lsp-enable-symbol-highlighting nil)
-  (setq lsp-rust-analyzer-cargo-watch-args ["--target-dir" "target/rust-analyzer"])
   (setq lsp-rust-analyzer-use-client-watching nil)
   (setq lsp-auto-guess-root t)
   (setq lsp-enable-file-watchers nil)
   ;; Use the wrapped rust analyzer to always load the correct direnv environment
   (setq lsp-rust-analyzer-server-command "rust-analyzer-wrapped")
+  (setq lsp-rust-analyzer-cargo-override-command [ "rust-analyzer-cargo-check" ])
   ;; (setq lsp-rust-analyzer-proc-macro-enable t)
   ;; (setq lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
 )
