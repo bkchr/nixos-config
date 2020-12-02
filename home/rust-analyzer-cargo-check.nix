@@ -5,11 +5,11 @@ let
   command = 
     if useCargoRemote then
       ''
-        ${cargo-remote}/bin/cargo-remote remote -bSKIP_WASM_BUILD=1 check -- --message-format=json --target-dir=target/rust-analyzer
+        ${cargo-remote}/bin/cargo-remote remote -bSKIP_WASM_BUILD=1 check -- --message-format=json --target-dir=target/rust-analyzer --tests --workspace 
       ''
     else 
       ''
-        SKIP_WASM_BUILD=1 cargo check --message-format=json --target-dir=target/rust-analyzer
+        SKIP_WASM_BUILD=1 cargo check --message-format=json --target-dir=target/rust-analyzer --tests --workspace
       '';
 in
 writeTextFile {
