@@ -17,6 +17,7 @@ in
 {
   imports = [
     ./modules/zsa
+    ./options.nix
   ];
 
   nix = {

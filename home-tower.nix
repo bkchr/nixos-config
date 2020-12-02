@@ -29,4 +29,6 @@
   ];
 
   services.sshd.enable = true;
+
+  computerType = "desktop";
 }
