@@ -82,4 +82,11 @@
         ("c" "org-protocol-capture" entry (file ,"~/org/inbox.org")
          "* TODO [[%:link][%:description]]\n\n %i" :immediate-finish t)))
   (setq org-todo-keywords
-  '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DONE(d)"))))
+  '((sequence "TODO(t)" "IN-PROGRESS(i)" "WAITING(w)" "DONE(d)")))
+
+  (setq org-journal-date-prefix "#+TITLE: "
+	org-journal-time-prefix "* "
+	org-journal-date-format "%a, %Y-%m-%d"
+	org-journal-file-format "%Y-%m-%d.org"
+	org-journal-dir "~/org/journal/")
+)
