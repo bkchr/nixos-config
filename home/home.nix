@@ -80,6 +80,10 @@ in
     };
   };
 
+  programs.vim = {
+    enable = true;
+  };
+
   # Pass configs
   services.password-store-sync.enable = true;
   programs.password-store = {
