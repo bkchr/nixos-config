@@ -5,8 +5,8 @@ let
   polkadot-launch-src = pkgs.fetchFromGitHub {
     owner = "shawntabrizi";
     repo = "polkadot-launch";
-    rev = "4b854e9df6a7219019fc9bf3cc1eaf75b85aa591";
-    sha256 = "16qv867w32n19f3rkvrabgw107f2dn2nyj3dbbx16v31822mly7s";
+    rev = "36da43aa3fca9addfb598eb70afcd8a5e52b535b";
+    sha256 = "19pv1ip5n7cw2hq9bbkhi8w2nrj0a6vi5hrm31ksfs3si7jr1dzq";
   };
   polkadot-launch = pkgs.callPackage "${polkadot-launch-src}/default.nix" {};
 in
