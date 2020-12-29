@@ -16,7 +16,6 @@ let
 in
 {
   imports = [
-    ./modules/zsa
     ./options.nix
   ];
 
