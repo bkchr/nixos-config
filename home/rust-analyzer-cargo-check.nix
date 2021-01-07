@@ -5,7 +5,7 @@ let
   command = 
     if useCargoRemote then
       ''
-        ${cargo-remote}/bin/cargo-remote remote -bSKIP_WASM_BUILD=1 check -- --message-format=json --target-dir=target/rust-analyzer --tests --workspace 
+        ${cargo-remote}/bin/cargo-remote remote -bSKIP_WASM_BUILD=1 check --message-format=json --target-dir=target/rust-analyzer --tests --workspace 
       ''
     else 
       ''

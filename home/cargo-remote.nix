@@ -2,15 +2,15 @@
 
 rustPlatform.buildRustPackage rec {
   name = "cargo-remote-${version}";
-  version = "549e2a7684f959e5c7d56583d42d7c48bda2d3ab";
+  version = "d16a1639d382c3bf4b3c1a7663102d0208f3b5de";
   src = fetchFromGitHub {
     owner = "bkchr";
     repo = "cargo-remote";
     rev = "${version}";
-    sha256 = "0661hkrxxg163vz8vd34yd35gyq1n2q89ri5pkkqyxrmbbgwra2s";
+    sha256 = "05cb4w2asp7vasw1gpvwagzzafmivalbs5lqcybf238bkdaa9909";
   };
 
-  cargoSha256 = "0q6mh79a6ny75qknrh0bvxh49pi9i7sxjwqvy0vp0jadff1las4y";
+  cargoSha256 = "1ha6zzsdx3vmf9lwrijqb8lmhfpjddb1kpwdrrl84n8y753pab01";
 
   doCheck = false;
 }
