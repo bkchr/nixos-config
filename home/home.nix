@@ -105,4 +105,6 @@ in
       remote = "bkchr@10.1.1.54"
     '';
   };
+
+  programs.command-not-found.enable = true;
 }
