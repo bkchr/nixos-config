@@ -3,10 +3,10 @@ let
   pkgs = import <nixpkgs> {};
   myrust = ((rustChannelOf { date = "2020-10-04"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
   polkadot-launch-src = pkgs.fetchFromGitHub {
-    owner = "shawntabrizi";
+    owner = "paritytech";
     repo = "polkadot-launch";
-    rev = "36da43aa3fca9addfb598eb70afcd8a5e52b535b";
-    sha256 = "19pv1ip5n7cw2hq9bbkhi8w2nrj0a6vi5hrm31ksfs3si7jr1dzq";
+    rev = "365a21c266a20380f90df20e623c699d29879008";
+    sha256 = "0451ia4a4hp1dfg5g9mbg2h7azmj9pz5qrh181srpjm8l12s4m31";
   };
   polkadot-launch = pkgs.callPackage "${polkadot-launch-src}/default.nix" {};
 in
