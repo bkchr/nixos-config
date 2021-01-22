@@ -1,7 +1,7 @@
 with import <nixpkgs> {};
 let
   pkgs = import <nixpkgs> {};
-  myrust = ((rustChannelOf { date = "2021-01-12"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2021-01-14"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
   polkadot-launch-src = pkgs.fetchFromGitHub {
     owner = "paritytech";
     repo = "polkadot-launch";
