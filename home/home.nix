@@ -67,7 +67,7 @@ in
   programs.git = {
     enable = true;
 
-    userEmail = "git@kchr.de";
+    userEmail = "info@kchr.de";
     userName = "Bastian Köcher";
     
     # Enable the delta syntax highlighter
