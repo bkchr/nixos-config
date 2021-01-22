@@ -73,10 +73,13 @@ in
     # Enable the delta syntax highlighter
     delta.enable = true;
 
-    signing.key = "CBC7115E48718492";
-
     extraConfig = {
       pull.rebase = "false";
+    };
+
+    signing = {
+      key = "04635497024D54443D96BDE4CBC7115E48718492";
+      signByDefault = true;
     };
   };
 
