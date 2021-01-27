@@ -110,4 +110,6 @@ in
   };
 
   programs.command-not-found.enable = true;
+
+  programs.alacritty.enable = true;
 }
