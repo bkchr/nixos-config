@@ -1,12 +1,12 @@
 with import <nixpkgs> {};
 let
   pkgs = import <nixpkgs> {};
-  myrust = ((rustChannelOf { date = "2021-01-14"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
+  myrust = ((rustChannelOf { date = "2021-01-28"; channel = "nightly"; }).rust.override { extensions = [ "rust-src" "rust-analysis" "rustfmt-preview" ]; targets = [ "wasm32-unknown-unknown" ]; });
   polkadot-launch-src = pkgs.fetchFromGitHub {
     owner = "paritytech";
     repo = "polkadot-launch";
-    rev = "365a21c266a20380f90df20e623c699d29879008";
-    sha256 = "0451ia4a4hp1dfg5g9mbg2h7azmj9pz5qrh181srpjm8l12s4m31";
+    rev = "ca679675eccc16cab1565c478238f228922670ff";
+    sha256 = "0415svji54a4s5zc0pnf9y0w3hd9hq70fsswr7w3k6zi8bjqi438";
   };
   polkadot-launch = pkgs.callPackage "${polkadot-launch-src}/default.nix" {};
 in
