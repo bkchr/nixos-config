@@ -18,6 +18,8 @@
   (setq lsp-rust-analyzer-cargo-override-command [ "rust-analyzer-cargo-check" ])
   ;; (setq lsp-rust-analyzer-proc-macro-enable t)
   ;; (setq lsp-rust-analyzer-cargo-load-out-dirs-from-check t)
+  (evil-define-key 'normal rustic-mode-map 
+    "J" #'lsp-rust-analyzer-join-lines)
 )
 
 (setq display-line-numbers-type 'relative)
