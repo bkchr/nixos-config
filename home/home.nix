@@ -3,6 +3,7 @@
 let
   sysconfig = (import <nixpkgs/nixos> {}).config;
   cargo_remote = pkgs.callPackage ./cargo-remote.nix {};
+  diener = pkgs.callPackage ./diener.nix {};
   rust_analyzer_wrapped = pkgs.callPackage ./rust-analyzer-wrapped.nix {};
   rust_analyzer_cargo_check = pkgs.callPackage ./rust-analyzer-cargo-check.nix {
     cargo-remote = cargo_remote;
@@ -24,6 +25,8 @@ in
 
     rust_analyzer_wrapped
     rust_analyzer_cargo_check
+
+    diener
   ];
   
   # Enable lorri
