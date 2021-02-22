@@ -91,42 +91,16 @@ in
   services.thinkfan = {
     enable = true;
 
-    sensors = ''
-      # Entries here discovered by:
-      # find /sys/devices -type f -name "temp*_input"
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp6_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp13_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp3_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp10_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp7_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp14_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp4_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp11_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp8_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp1_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp15_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp5_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp12_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp9_input
-      hwmon /sys/devices/platform/thinkpad_hwmon/hwmon/hwmon5/temp16_input
-      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp3_input
-      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp1_input
-      hwmon /sys/devices/pci0000:00/0000:00:1d.0/0000:55:00.0/hwmon/hwmon0/temp2_input
-      hwmon /sys/devices/virtual/thermal/thermal_zone9/hwmon3/temp1_input
-      hwmon /sys/devices/virtual/thermal/thermal_zone10/hwmon4/temp1_input
-      hwmon /sys/devices/virtual/thermal/thermal_zone13/hwmon9/temp1_input
-    '';
-
-    levels = ''
-      (0,     0,      42)
-      (1,     40,     47)
-      (2,     45,     52)
-      (3,     50,     57)
-      (4,     55,     62)
-      (5,     60,     77)
-      (7,     73,     93)
-      (127,   85,     32767)
-    '';
+    levels = [
+      [0 0 42]
+      [1 40 47]
+      [2 45 52]
+      [3 50 57]
+      [4 55 62]
+      [5 60 77]
+      [7 73 93]
+      [127 85 32767]
+    ];
   };
 
   #services.thermald = {
